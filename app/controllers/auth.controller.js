@@ -8,8 +8,8 @@ module.exports = function () {
 
 
         $scope.login = function () {
-            if ($scope.user == "khemis") {
-
+            if ($scope.user == "khemis" && $scope.password == "khemis") {
+                $state.go("missions");
             } else if ($scope.user == "khaled") {
 
             } else {

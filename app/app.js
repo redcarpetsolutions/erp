@@ -12,9 +12,9 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     $mdThemingProvider
         .theme('default')
-        .primaryPalette('red')
-        .accentPalette('orange')
-        .warnPalette('blue-grey')
+        .primaryPalette('blue')
+        .accentPalette('teal')
+        .warnPalette('red')
         .backgroundPalette('grey');
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// Routing de l'application
