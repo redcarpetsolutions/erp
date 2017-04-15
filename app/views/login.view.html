@@ -1,0 +1,21 @@
+<div layout="column" ng-cloak layout-align="center center" ng-controller="AuthenticationController">
+    <md-card>
+        <img ng-src="https://assets.entrepreneur.com/content/16x9/822/20160118164234-interior-modern-office-desks-space-computers.jpeg"
+            class="md-card-image" alt="Washed Out">
+        <md-card-content layout="column">
+            <md-input-container>
+                <label>Login</label>
+                <input ng-model="user.username" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Password</label>
+                <input ng-model="user.password" type="email" required>
+            </md-input-container>
+
+            <md-input-container>
+                <md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
+            </md-input-container>
+        </md-card-content>
+    </md-card>
+</div>
