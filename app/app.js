@@ -30,32 +30,32 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
     });
     ///Missions
     $stateProvider.state('missions', {
-        url: '/missions',
+        url: '/admin/missions',
         templateUrl: "views/missions/missions.view.html"
     });
     $stateProvider.state('missionAdd', {
-        url: '/missions/add',
+        url: '/admin/missions/add',
         templateUrl: "views/missions/add.view.html"
     });
     $stateProvider.state('missionDetails', {
-        url: '/missions/:id',
+        url: '/admin/missions/:id',
         templateUrl: "views/missions/details.view.html"
     });
     $stateProvider.state('missionEdit', {
-        url: '/missions/:id/edit',
+        url: '/admin/missions/:id/edit',
         templateUrl: "views/missions/edit.view.html"
     });
     ///Consultant
     $stateProvider.state('consultants', {
-        url: '/consultants',
+        url: '/admin/consultants',
         templateUrl: "views/consultants/consultants.view.html"
     });
     $stateProvider.state('consultantAdd', {
-        url: '/consultants/add',
+        url: '/admin/consultants/add',
         templateUrl: "views/consultants/add.view.html"
     });
     $stateProvider.state('consultantEdit', {
-        url: '/consultants/:id/edit',
+        url: '/admin/consultants/:id/edit',
         templateUrl: "views/consultants/edit.view.html"
     });
 

@@ -1,53 +1,53 @@
 'use strict'
 
 
-module.exports = function () {
+module.exports = function() {
 
-    var consultants = [
-        {
-            id:1,
-            firstName: "Khaled",
-            lastName: "Romdhane",
+    var consultants = [{
+            id: 1,
+            firstName: "Salma",
+            lastName: "Khemis",
             salary: "300",
             payment: "daily",
-            picture: "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.0-9/12072711_10205938433954145_2510480122071916171_n.jpg?oh=fcb3e0cb99cb77378f2e9d9697bc7cdc&oe=598BAC7B"
+            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-9/17021563_10210372323757483_3670622109916565036_n.jpg?oh=48af05b5efa56778c90a3956784b652d&oe=59BC0FE4"
         },
         {
-            id:2,
-            firstName: "Mahdi",
-            lastName: "Kahia",
+            id: 2,
+            firstName: "Malek",
+            lastName: "Said",
             salary: "30",
             payment: "hourly",
-            picture: "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.0-9/16864183_10210664369718443_9008044928972198531_n.jpg?oh=52d7ea6a076df503adf0359b1f0404a5&oe=59564254"
+            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t31.0-8/s960x960/16178402_10202488179121941_5677368452909218528_o.jpg?oh=60afd9aa6336b86271165b416cbff4ab&oe=59AF42EC"
         }, {
-            id:3,
-            firstName: "Oussama",
-            lastName: "Hmidi",
+            id: 3,
+            firstName: "Emna",
+            lastName: "Khemis",
             salary: "100",
             payment: "daily",
-            picture: "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.0-9/17626686_1849087072015524_1450124250890106427_n.jpg?oh=651f288cc7454147a133f5c37c7fcda2&oe=599AEF8F"
+            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-1/10645271_10203814886804607_5720282964011063521_n.jpg?oh=954f64e6236b4c29b27d269b3edfbdec&oe=5975A525"
         }, {
-            id:4,
-            firstName: "Yesmine",
-            lastName: "Sayah",
+            id: 4,
+            firstName: "Farah",
+            lastName: "Ouennich",
             salary: "80",
             payment: "hourly",
-            picture: "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.0-9/15940786_10210693168357640_5183776965096805074_n.jpg?oh=45576ae3c54e1aa94c833180708753e8&oe=598F1BE7"
+            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t31.0-1/c282.0.960.960/p960x960/1402926_10150004552801901_469209496895221757_o.jpg?oh=57ada7d2849f049e21875297ebc70e07&oe=59A7C66A"
 
         }, {
-            id:5,
-            firstName: "Seif",
-            lastName: "Kardous",
+            id: 5,
+            firstName: "Ghalia Ouderni",
+            lastName: "Chaaban",
             salary: "80",
             payment: "hourly",
-            picture: "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.0-9/12246791_1526675700976238_7599198168473573067_n.jpg?oh=7acde87c0139f77b6e12f7d4b2b1d716&oe=59987DF3"
+            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t31.0-1/c282.0.960.960/p960x960/1402926_10150004552801901_469209496895221757_o.jpg?oh=57ada7d2849f049e21875297ebc70e07&oe=59A7C66A"
         }
     ];
 
     function serviceFn() {
-        this.getAll = function () {
+        this.getAll = function() {
             return consultants;
         }
+
         function getIndex(id) {
             for (var i = 0; i < consultants.length; i++) {
                 if (consultants[i].id == id) {
@@ -55,16 +55,17 @@ module.exports = function () {
                 }
             }
         }
+
         function remove(index) {
             consultants.splice(index, 1);
         }
-        this.getById = function (id) {
+        this.getById = function(id) {
             return consultants[getIndex(id)];
         }
-        this.add = function (consultant) {
+        this.add = function(consultant) {
             consultants.push(consultant);
         }
-        this.update = function (id, consultant) {
+        this.update = function(id, consultant) {
             remove(getIndex(id));
             consultants.push(consultant);
         }
