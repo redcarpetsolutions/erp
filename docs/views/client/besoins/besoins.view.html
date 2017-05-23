@@ -1,0 +1,32 @@
+<div ng-controller="ClientBesoinsController" layout="column" ng-cloak>
+    <md-toolbar>
+        <toolbar></toolbar>
+    </md-toolbar>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true" md-whiteframe="4">
+            <md-content layout-padding>
+                <menu></menu>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding flex>
+            <h1>Mes Besoins</h1>
+            <md-button class="md-raised md-primary" ui-sref="clientbesoinsAdd">Nouveau Besoins</md-button>
+            <table class="data-table">
+                <tr>
+                    <td>Titre</td>
+                    <td>Description</td>
+                    <td>Date</td>
+                    <td>Action</td>
+                </tr>
+                <tr ng-repeat="b in besoins">
+                    <td>{{b.title}}</td>
+                    <td>{{b.description}}</td>
+                    <td>{{b.date | date}}</td>
+                    <td>
+                        <md-button class="md-raised md-accent" ui-sref="clientbesionsEdit({id:b.id})">Modifier</md-button>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </div>
+</div>
