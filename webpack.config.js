@@ -9,13 +9,15 @@ module.exports = {
     output: {
         path: __dirname + "/dist",
         filename: "bundle.js"
-    }, module: {
-        rules: [
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("css-loader")
-            }
-        ]
+    },
+    module: {
+        rules: [{
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("css-loader")
+        }, {
+            test: /\.(png|jpg)$/,
+            loader: 'url-loader'
+        }]
     },
     plugins: [
         new HtmlWebpackPlugin({

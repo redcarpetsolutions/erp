@@ -23,43 +23,109 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/login',
         templateUrl: "views/login.view.html"
     });
-
+    //Index
+    $stateProvider.state('index', {
+        url: '/',
+        templateUrl: "views/index.view.html"
+    });
+    $stateProvider.state('profile', {
+        url: '/profile',
+        templateUrl: "views/profile.view.html"
+    });
     $stateProvider.state('dashboard', {
         url: '/dashboard',
         templateUrl: "views/dashboard.view.html"
     });
+    ///////////////////////////////Client Routing
+    ///Besoins
+    $stateProvider.state('clientbesoins', {
+        url: '/besoins',
+        templateUrl: "views/client/besoins/besoins.view.html"
+    });
+    $stateProvider.state('clientbesoinsAdd', {
+        url: '/besoins/add',
+        templateUrl: "views/client/besoins/add.view.html"
+    });
+    $stateProvider.state('clientbesionsEdit', {
+        url: '/besoins/:id/edit',
+        templateUrl: "views/client/besoins/edit.view.html"
+    });
+    ///Missions
+    // $stateProvider.state('clientmissions', {
+    //     url: '/missions',
+    //     templateUrl: "views/client/missions/missions.view.html"
+    // });
+    // $stateProvider.state('clientmissionDetails', {
+    //     url: '/missions/:id',
+    //     templateUrl: "views/client/missions/details.view.html"
+    // });
+    ///////////////////////////////Consultant Routing
+    ///Besoins
+    $stateProvider.state('comercialbesoins', {
+        url: '/comercial/besoins',
+        templateUrl: "views/comercial/besoins/besoins.view.html"
+    });
+    ///Consultant
+    $stateProvider.state('comercialconsultants', {
+        url: '/comercial/comercial',
+        templateUrl: "views/comercial/consultants/consultants.view.html"
+    });
+    ///////////////////////////////Admin Routing
     ///Missions
     $stateProvider.state('missions', {
         url: '/admin/missions',
-        templateUrl: "views/missions/missions.view.html"
+        templateUrl: "views/admin/missions/missions.view.html"
     });
     $stateProvider.state('missionAdd', {
         url: '/admin/missions/add',
-        templateUrl: "views/missions/add.view.html"
+        templateUrl: "views/admin/missions/add.view.html"
     });
     $stateProvider.state('missionDetails', {
         url: '/admin/missions/:id',
-        templateUrl: "views/missions/details.view.html"
+        templateUrl: "views/admin/missions/details.view.html"
     });
     $stateProvider.state('missionEdit', {
         url: '/admin/missions/:id/edit',
-        templateUrl: "views/missions/edit.view.html"
+        templateUrl: "views/admin/missions/edit.view.html"
     });
     ///Consultant
     $stateProvider.state('consultants', {
         url: '/admin/consultants',
-        templateUrl: "views/consultants/consultants.view.html"
+        templateUrl: "views/admin/consultants/consultants.view.html"
     });
     $stateProvider.state('consultantAdd', {
         url: '/admin/consultants/add',
-        templateUrl: "views/consultants/add.view.html"
+        templateUrl: "views/admin/consultants/add.view.html"
     });
     $stateProvider.state('consultantEdit', {
         url: '/admin/consultants/:id/edit',
-        templateUrl: "views/consultants/edit.view.html"
+        templateUrl: "views/admin/consultants/edit.view.html"
+    });
+    ///Commerciaux
+    $stateProvider.state('commerciaux', {
+        url: '/admin/commerciaux',
+        templateUrl: "views/admin/commerciaux/commerciaux.view.html"
+    });
+    $stateProvider.state('commerciauxAdd', {
+        url: '/admin/commerciaux/add',
+        templateUrl: "views/admin/commerciaux/add.view.html"
+    });
+    $stateProvider.state('commerciauxEdit', {
+        url: '/admin/commerciaux/:id/edit',
+        templateUrl: "views/admin/commerciaux/edit.view.html"
     });
 
-    $urlRouterProvider.otherwise('/login');
+    ///Besoins
+    $stateProvider.state('besoins', {
+        url: '/admin/besoins',
+        templateUrl: "views/admin/besoins/besoins.view.html"
+    });
+    $stateProvider.state('besoinsEdit', {
+        url: '/admin/besoins/:id/edit',
+        templateUrl: "views/admin/besoins/edit.view.html"
+    });
+
+    $urlRouterProvider.otherwise('/');
 }
 configFn.$inject = ['$mdThemingProvider', '$stateProvider', '$urlRouterProvider'];
 
@@ -73,6 +139,8 @@ angular.module('app', ['ngMaterial', 'ui.router']).config(configFn);
 require('./services/dialog.service.js')();
 require('./services/missions.service.js')();
 require('./services/consultant.service.js')();
+require('./services/commerciaux.service.js')();
+require('./services/besoins.service.js')();
 
 
 
@@ -89,7 +157,18 @@ require('./directives/toolbar.directive.js')();
 /// Controllers
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+require('./controllers/directivesControllers/menu.controller.js')();
 require('./controllers/auth.controller.js')();
-require('./controllers/dashboard.controller.js')();
-require('./controllers/missions.controller.js')();
-require('./controllers/consultants.controller.js')();
+require('./controllers/profile.controller.js')();
+
+require('./controllers/adminControllers/dashboard.controller.js')();
+require('./controllers/adminControllers/missions.controller.js')();
+require('./controllers/adminControllers/consultants.controller.js')();
+require('./controllers/adminControllers/commerciaux.controller.js')();
+require('./controllers/adminControllers/besoins.controller.js')();
+
+require('./controllers/clientControllers/missions.controller.js')();
+require('./controllers/clientControllers/besoins.controller.js')();
+
+require('./controllers/commerciauxControllers/besoins.controller.js')();
+require('./controllers/commerciauxControllers/consultants.controller.js')();
