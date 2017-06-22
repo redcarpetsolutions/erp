@@ -1,4 +1,4 @@
-<div ng-controller="MissionsController" layout="column" ng-cloak>
+<div ng-controller="CommercialMissionsController" layout="column" ng-cloak>
     <md-toolbar>
         <toolbar></toolbar>
     </md-toolbar>
@@ -10,7 +10,6 @@
         </md-sidenav>
         <md-content layout-padding flex>
             <h1>Missions</h1>
-            <md-button class="md-raised md-primary" ui-sref="missionAdd">Nouvelle Missions</md-button>
             <table class="data-table">
                 <tr>
                     <td>Titre</td>
@@ -25,14 +24,14 @@
                 <tr ng-repeat="m in missions">
                     <td>{{m.title}}</td>
                     <td>{{m.startDate | date}}</td>
-                    <td>{{m.endDate| date}}</td>
+                    <td>{{m.endDate | date}}</td>
                     <td>{{m.leader.firstName}} {{m.leader.lastName}}
                     </td>
                     <td>{{m.method}}</td>
                     <td>{{m.technology}}</td>
                     <td>
                         <md-button class="md-raised md-primary" ng-click="details(m)">Details</md-button>
-                        <md-button class="md-raised md-accent" ui-sref="missionEdit({id:m.id})">Modifier</md-button>
+                        <!--<md-button class="md-raised md-accent" ui-sref="missionEdit({id:m.id})">Modifier</md-button>-->
                     </td>
                 </tr>
             </table>
