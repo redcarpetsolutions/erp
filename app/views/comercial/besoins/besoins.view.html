@@ -12,6 +12,7 @@
             <h1>Besoins des Clients</h1>
             <table class="data-table">
                 <tr>
+                    <td>Client</td>
                     <td>Titre</td>
                     <td>Description</td>
                     <td>Date</td>
@@ -25,6 +26,9 @@
                     <td>{{b.title}}</td>
                     <td>{{b.description}}</td>
                     <td>{{b.date | date}}</td>
+                    <td>
+                        <md-button class="md-raised md-primary" ng-click="proposer(b.id)">Proposer</md-button>
+                    </td>
                 </tr>
             </table>
         </md-content>

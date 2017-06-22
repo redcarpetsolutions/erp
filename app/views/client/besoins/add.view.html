@@ -19,6 +19,10 @@
                     <label>Description</label>
                     <input ng-model="besoin.description" required>
                 </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <input type="date" ng-model="besoin.date" required>
+                </md-input-container>
                 <md-button class="md-raised md-accent" ng-click="add()">Valider</md-button>
                 <md-button class="md-raised md-primary" ui-sref="clientbesoins">Retour</md-button>
             </md-content>

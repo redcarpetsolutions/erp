@@ -17,8 +17,11 @@
 </md-list>
 
 <md-list ng-controller="MenuController" ng-show="userType == 'client'" flex>
+    <md-list-item ng-click="null" ui-sref="clientmissions" ng-show="loggedin">
+        Missions
+    </md-list-item>
     <md-list-item ng-click="null" ui-sref="clientbesoins">
-        Besoins
+        Mes Besoins
     </md-list-item>
     <md-list-item ng-click="null" ui-sref="profile" ng-show="loggedin">
         Profile
@@ -32,12 +35,16 @@
 </md-list>
 
 <md-list ng-controller="MenuController" ng-show="userType == 'comercial'" flex>
-    <md-list-item ng-click="null" ui-sref="comercialbesoins">
+    <md-list-item ng-click="null" ui-sref="commercialmissions">
+        Missions
+    </md-list-item>
+    <md-list-item ng-click="null" ui-sref="commercialbesoins">
         Besoins
     </md-list-item>
-    <md-list-item ng-click="null" ui-sref="comercialconsultants">
+    <md-list-item ng-click="null" ui-sref="commercialconsultants">
         Consultants
     </md-list-item>
+    
     <md-list-item ng-click="logout()">
         Deconnexion
     </md-list-item>

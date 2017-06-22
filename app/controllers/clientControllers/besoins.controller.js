@@ -3,10 +3,11 @@
 
 module.exports = function() {
 
-    function controllerFn($scope, DialogService, BesoinsService, $state, $stateParams) {
+    function controllerFn($scope, DialogService, BesoinsService, $state, $stateParams,StoreService) {
         $scope.interact = true;
 
         $scope.add = function() {
+            $scope.besoin.user = StoreService.getCurrentUser();
             BesoinsService.add($scope.besoin);
             $state.go('clientbesoins');
         }
@@ -31,6 +32,6 @@ module.exports = function() {
         });
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'BesoinsService', '$state', '$stateParams'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'BesoinsService', '$state', '$stateParams','StoreService'];
     angular.module('app').controller("ClientBesoinsController", controllerFn);
 }

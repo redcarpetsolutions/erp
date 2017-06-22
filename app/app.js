@@ -16,6 +16,8 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         .accentPalette('teal')
         .warnPalette('red')
         .backgroundPalette('grey');
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// Routing de l'application
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +38,10 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/dashboard',
         templateUrl: "views/dashboard.view.html"
     });
+
+
+
+
     ///////////////////////////////Client Routing
     ///Besoins
     $stateProvider.state('clientbesoins', {
@@ -50,26 +56,44 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/besoins/:id/edit',
         templateUrl: "views/client/besoins/edit.view.html"
     });
-    ///Missions
-    // $stateProvider.state('clientmissions', {
-    //     url: '/missions',
-    //     templateUrl: "views/client/missions/missions.view.html"
-    // });
-    // $stateProvider.state('clientmissionDetails', {
-    //     url: '/missions/:id',
-    //     templateUrl: "views/client/missions/details.view.html"
-    // });
+    $stateProvider.state('clientmissions', {
+        url: '/missions',
+        templateUrl: "views/client/missions/missions.view.html"
+    });
+    $stateProvider.state('clientmissionsdetails', {
+        url: '/missions/:id',
+        templateUrl: "views/client/missions/details.view.html"
+    });
+    
+
+
     ///////////////////////////////Consultant Routing
     ///Besoins
-    $stateProvider.state('comercialbesoins', {
-        url: '/comercial/besoins',
+    $stateProvider.state('commercialbesoins', {
+        url: '/commercial/besoins',
         templateUrl: "views/comercial/besoins/besoins.view.html"
     });
+    $stateProvider.state('commercialbesoinsprop', {
+        url: '/commercial/besoins/:id',
+        templateUrl: "views/comercial/besoins/proposition.view.html"
+    });
     ///Consultant
-    $stateProvider.state('comercialconsultants', {
-        url: '/comercial/comercial',
+    $stateProvider.state('commercialconsultants', {
+        url: '/commercial/comercial',
         templateUrl: "views/comercial/consultants/consultants.view.html"
     });
+    //Missions
+    $stateProvider.state('commercialmissions', {
+        url: '/commercial/missions',
+        templateUrl: "views/comercial/missions/missions.view.html"
+    });
+    $stateProvider.state('commercialmissionsdetails', {
+        url: '/commercial/missions/:id',
+        templateUrl: "views/comercial/missions/details.view.html"
+    });
+
+
+
     ///////////////////////////////Admin Routing
     ///Missions
     $stateProvider.state('missions', {
@@ -141,6 +165,8 @@ require('./services/missions.service.js')();
 require('./services/consultant.service.js')();
 require('./services/commerciaux.service.js')();
 require('./services/besoins.service.js')();
+require('./services/store.service.js')();
+require('./services/proposition.service.js')();
 
 
 
@@ -172,3 +198,4 @@ require('./controllers/clientControllers/besoins.controller.js')();
 
 require('./controllers/commerciauxControllers/besoins.controller.js')();
 require('./controllers/commerciauxControllers/consultants.controller.js')();
+require('./controllers/commerciauxControllers/missions.controller.js')();

@@ -15,6 +15,8 @@ module.exports = function() {
         }
 
 
+
+
         $scope.$watch('$viewContentLoaded', function() {
             if ($state.current.name == 'besoins') {
                 $scope.besoins = BesoinsService.getAll();

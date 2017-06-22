@@ -8,7 +8,7 @@ module.exports = function() {
 
         $scope.$watch('$viewContentLoaded', function() {
 
-            if ($state.current.name == 'comercialconsultants') {
+            if ($state.current.name == 'commercialconsultants') {
                 $scope.consultants = ConsultantsService.getAll();
             }
 

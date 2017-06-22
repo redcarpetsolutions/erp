@@ -1,0 +1,54 @@
+<div ng-controller="CommerciauxBesoinsController" layout="column" ng-cloak>
+    <md-toolbar>
+        <toolbar></toolbar>
+    </md-toolbar>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true" md-whiteframe="4">
+            <md-content layout-padding>
+                <menu></menu>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding flex>
+            <md-content layout-padding flex>
+                <h2>{{besoin.title}}</h2>
+                <p>{{besoin.description}}</p>
+                <p> Proposer un consultant pour ce besoin </p>
+            </md-content>
+            <md-content layout-padding flex>
+                <form ng-submit="$event.preventDefault()">
+                    <md-autocomplete md-selected-item="consultant" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="fullName(item)"
+                        placeholder="Consultant">
+                        <md-item-template> <span md-highlight-text="searchText">{{item.firstName}} {{item.lastName}}</span> </md-item-template>
+                        <md-not-found> no match found </md-not-found>
+                    </md-autocomplete>
+                    <br>
+                    <md-button class="md-raised md-primary" ng-click="valider()">Proposer</md-button>
+                </form>
+            </md-content>
+            <md-content ng-if="besoin.propositions" layout-padding flex>
+                <p> Liste des Consultants deja proposer </p>
+                <table class="data-table">
+                    <tr>
+                        <td>Photo</td>
+                        <td>Nom Prenom</td>
+                        <td>Salaire</td>
+                        <td>Payment</td>
+                        <td>Action</td>
+                    </tr>
+
+                    <tr ng-repeat="c in besoin.propositions">
+                        <td><img ng-src="{{c.consultant.picture}}" style="height:128px">
+                        </td>
+                        <td>{{c.consultant.firstName}} {{c.consultant.lastName}}</td>
+                        <td>{{c.consultant.salary}}</td>
+                        <td>{{c.consultant.payment}}</td>
+                        <td>
+                            <md-button class="md-raised md-warn" ng-click="remove(c)" ng-if="canRemove(c)">Retirer</md-button>
+
+                        </td>
+                    </tr>
+                </table>
+            </md-content>
+        </md-content>
+    </div>
+</div>
