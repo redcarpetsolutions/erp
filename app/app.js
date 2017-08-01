@@ -56,16 +56,24 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/besoins/:id/edit',
         templateUrl: "views/client/besoins/edit.view.html"
     });
-    $stateProvider.state('clientmissions', {
-        url: '/missions',
-        templateUrl: "views/client/missions/missions.view.html"
+    $stateProvider.state('clientprojects', {
+        url: '/projects',
+        templateUrl: "views/client/projects/projects.view.html"
     });
-    $stateProvider.state('clientmissionsdetails', {
-        url: '/missions/:id',
-        templateUrl: "views/client/missions/details.view.html"
+     $stateProvider.state('clientprojectsAdd', {
+        url: '/projects/new',
+        templateUrl: "views/client/projects/add.view.html"
     });
-    
 
+    $stateProvider.state('clientprojectsDetails', {
+        url: '/projects/:id',
+        templateUrl: "views/client/projects/details.view.html"
+    });
+   $stateProvider.state('clientprojectsEdit', {
+        url: '/projects/:id/edit',
+        templateUrl: "views/client/projects/edit.view.html"
+    });
+   
 
     ///////////////////////////////Consultant Routing
     ///Besoins
@@ -87,11 +95,19 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/commercial/missions',
         templateUrl: "views/comercial/missions/missions.view.html"
     });
-    $stateProvider.state('commercialmissionsdetails', {
+    $stateProvider.state('commercialmissionsDetails', {
         url: '/commercial/missions/:id',
         templateUrl: "views/comercial/missions/details.view.html"
     });
-
+    //Projects
+    $stateProvider.state('commercialprojects', {
+        url: '/commercial/projects',
+        templateUrl: "views/comercial/projects/projects.view.html"
+    });
+    $stateProvider.state('commercialprojectsEdit', {
+        url: '/commercial/projects/:id',
+        templateUrl: "views/comercial/projects/edit.view.html"
+    });
 
 
     ///////////////////////////////Admin Routing
@@ -112,31 +128,27 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/admin/missions/:id/edit',
         templateUrl: "views/admin/missions/edit.view.html"
     });
-    ///Consultant
-    $stateProvider.state('consultants', {
-        url: '/admin/consultants',
-        templateUrl: "views/admin/consultants/consultants.view.html"
+    ///Project
+     $stateProvider.state('projects', {
+        url: '/admin/projects',
+        templateUrl: "views/admin/projects/projects.view.html"
     });
-    $stateProvider.state('consultantAdd', {
-        url: '/admin/consultants/add',
-        templateUrl: "views/admin/consultants/add.view.html"
+    $stateProvider.state('projectsDetails', {
+        url: '/admin/projects/:id',
+        templateUrl: "views/admin/projects/details.view.html"
     });
-    $stateProvider.state('consultantEdit', {
-        url: '/admin/consultants/:id/edit',
-        templateUrl: "views/admin/consultants/edit.view.html"
+    ///Employee
+    $stateProvider.state('employee', {
+        url: '/admin/employee',
+        templateUrl: "views/admin/employee/employee.view.html"
     });
-    ///Commerciaux
-    $stateProvider.state('commerciaux', {
-        url: '/admin/commerciaux',
-        templateUrl: "views/admin/commerciaux/commerciaux.view.html"
+    $stateProvider.state('employeeAdd', {
+        url: '/admin/employee/add',
+        templateUrl: "views/admin/employee/add.view.html"
     });
-    $stateProvider.state('commerciauxAdd', {
-        url: '/admin/commerciaux/add',
-        templateUrl: "views/admin/commerciaux/add.view.html"
-    });
-    $stateProvider.state('commerciauxEdit', {
-        url: '/admin/commerciaux/:id/edit',
-        templateUrl: "views/admin/commerciaux/edit.view.html"
+    $stateProvider.state('employeeEdit', {
+        url: '/admin/employee/:id/edit',
+        templateUrl: "views/admin/employee/edit.view.html"
     });
 
     ///Besoins
@@ -144,15 +156,14 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/admin/besoins',
         templateUrl: "views/admin/besoins/besoins.view.html"
     });
-    $stateProvider.state('besoinsEdit', {
-        url: '/admin/besoins/:id/edit',
-        templateUrl: "views/admin/besoins/edit.view.html"
+    $stateProvider.state('besoinsDetails', {
+        url: '/admin/besoins/:id',
+        templateUrl: "views/admin/besoins/details.view.html"
     });
 
     $urlRouterProvider.otherwise('/');
 }
-configFn.$inject = ['$mdThemingProvider', '$stateProvider', '$urlRouterProvider'];
-
+configFn.$inject = ['$mdThemingProvider', '$stateProvider', '$urlRouterProvider'];;
 
 angular.module('app', ['ngMaterial', 'ui.router']).config(configFn);
 
@@ -162,8 +173,7 @@ angular.module('app', ['ngMaterial', 'ui.router']).config(configFn);
 
 require('./services/dialog.service.js')();
 require('./services/missions.service.js')();
-require('./services/consultant.service.js')();
-require('./services/commerciaux.service.js')();
+require('./services/users.service.js')();
 require('./services/besoins.service.js')();
 require('./services/store.service.js')();
 require('./services/proposition.service.js')();
@@ -189,13 +199,14 @@ require('./controllers/profile.controller.js')();
 
 require('./controllers/adminControllers/dashboard.controller.js')();
 require('./controllers/adminControllers/missions.controller.js')();
-require('./controllers/adminControllers/consultants.controller.js')();
-require('./controllers/adminControllers/commerciaux.controller.js')();
+require('./controllers/adminControllers/projects.controller.js')();
+require('./controllers/adminControllers/employees.controller.js')();
 require('./controllers/adminControllers/besoins.controller.js')();
 
-require('./controllers/clientControllers/missions.controller.js')();
+require('./controllers/clientControllers/projects.controller.js')();
 require('./controllers/clientControllers/besoins.controller.js')();
 
 require('./controllers/commerciauxControllers/besoins.controller.js')();
 require('./controllers/commerciauxControllers/consultants.controller.js')();
+require('./controllers/commerciauxControllers/projects.controller.js')();
 require('./controllers/commerciauxControllers/missions.controller.js')();

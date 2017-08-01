@@ -1,28 +1,33 @@
 'use strict'
 
 
-module.exports = function() {
+module.exports = function () {
 
     function controllerFn($scope, DialogService, BesoinsService, $state, $stateParams) {
         $scope.interact = true;
 
-        $scope.details = function(m) {
+        $scope.details = function (m) {
             $state.go('besoinsDetails', { id: m.id });
         }
-        $scope.edit = function() {
-            BesoinsService.update($scope.besoin.id, $scope.besoin);
-            $state.go('besoins');
+        $scope.edit = function () {
+            BesoinsService.update($scope.besoin.id, $scope.besoin).then(function () {
+                $state.go('besoins');
+            });
         }
 
 
 
 
-        $scope.$watch('$viewContentLoaded', function() {
+        $scope.$watch('$viewContentLoaded', function () {
             if ($state.current.name == 'besoins') {
-                $scope.besoins = BesoinsService.getAll();
+                BesoinsService.getAll().then(function (response) {
+                    $scope.besoins = response.data;
+                });
             }
-            if ($state.current.name == 'besoinsEdit') {
-                $scope.besoin = BesoinsService.getById($stateParams.id);
+            if ($state.current.name == 'besoinsDetails') {
+                BesoinsService.getById($stateParams.id).then(function(response){
+                    $scope.besoin = response.data;
+                });
             }
         });
     }

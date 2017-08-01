@@ -1,4 +1,4 @@
-<div ng-controller="MissionsController" layout="column" ng-cloak>
+<div ng-controller="CommercialProjectsController" layout="column" ng-cloak>
     <md-toolbar>
         <toolbar></toolbar>
     </md-toolbar>
@@ -60,7 +60,7 @@
                             <img ng-src="{{e.picture}}" class="md-avatar" />
                             <div class="md-list-item-text" layout="column">
                                 <h3>
-                                    {{e.firstName}} {{e.lastName}} (Cliquer pour Supprimer)</h3>
+                                    {{e.firstName}} {{e.lastName}}</h3>
                                 <h4>Membre</h4>
                                 <p>{{e.salary}} {{e.payment}}</p>
                             </div>
@@ -76,55 +76,9 @@
             </md-content>
             <md-divider>
             </md-divider>
-            <!--  Taches   -->
-            <!--<md-content>
-                <h2> Tache</h2>
-                <md-list>
-                    <md-list-item ng-repeat="e in mission.tasks" ng-click="removeTask(e.title)" class="md-3-line">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>
-                                {{e.title}} : {{e.description}}</h3>
-                            <h4>{{e.responsible.firstName}} {{e.responsible.lastName}}</h4>
-                            <p>{{e.startDate | date }} - {{e.endDate | date}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-                <md-content layout="row">
-                    <md-input-container>
-                        <label>Titre</label>
-                        <input ng-model="task.title" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Description</label>
-                        <input ng-model="task.description" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Debut</label>
-                        <md-datepicker ng-model="task.startDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Fin</label>
-                        <md-datepicker ng-model="task.endDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Responsable</label>
-                        <md-select ng-model="task.responsible">
-                            <md-option ng-value="mission.leader">
-                                {{mission.leader.firstName}} {{mission.leader.lastName}}
-                            </md-option>
-                            <md-option ng-repeat="c in mission.team" ng-value="c">
-                                {{c.firstName}} {{c.lastName}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <md-button class="md-raised md-primary" ng-click="addTask()">Ajouter Tache</md-button>
-                    </md-input-container>
-                </md-content>
-            </md-content>-->
-            <md-button class="md-raised md-accent" ng-click="add()">Confirmer</md-button>
-            <md-button class="md-raised md-primary" ui-sref="missions">Retour</md-button>
+            
+            <md-button class="md-raised md-accent" ng-click="edit()">Modifier</md-button>
+            <md-button class="md-raised md-primary" ui-sref="commercialprojects">Retour</md-button>
         </md-content>
     </div>
 </div>

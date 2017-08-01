@@ -11,6 +11,8 @@
         <md-content layout-padding flex>
             <h1>Mes Besoins</h1>
             <md-button class="md-raised md-primary" ui-sref="clientbesoinsAdd">Nouveau Besoins</md-button>
+            <p> Vous pouvez deposez votre demande pour recruter un de nos consultant.</p>
+            <p> Veuillez indiquer les competences que vous rechercher dans la descriptions</p>
             <table class="data-table">
                 <tr>
                     <td>Titre</td>
@@ -23,7 +25,7 @@
                     <td>{{b.description}}</td>
                     <td>{{b.date | date}}</td>
                     <td>
-                        <md-button class="md-raised md-accent" ui-sref="clientbesionsEdit({id:b.id})">Modifier</md-button>
+                        <md-button class="md-raised md-accent" ui-sref="clientbesionsEdit({id:b.id})">Details</md-button>
                     </td>
                 </tr>
             </table>

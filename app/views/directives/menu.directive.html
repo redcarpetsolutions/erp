@@ -2,14 +2,14 @@
     <md-list-item ng-click="null" ui-sref="missions">
         Missions
     </md-list-item>
-    <md-list-item ng-click="null" ui-sref="consultants">
-        Consultants
+    <md-list-item ng-click="null" ui-sref="projects">
+        Projets
+    </md-list-item>
+    <md-list-item ng-click="null" ui-sref="employee">
+        Employer
     </md-list-item>
     <md-list-item ng-click="null" ui-sref="besoins">
         Besoins
-    </md-list-item>
-    <md-list-item ng-click="null" ui-sref="commerciaux">
-        Commerciaux
     </md-list-item>
     <md-list-item ng-click="logout()">
         Deconnexion
@@ -17,8 +17,8 @@
 </md-list>
 
 <md-list ng-controller="MenuController" ng-show="userType == 'client'" flex>
-    <md-list-item ng-click="null" ui-sref="clientmissions" ng-show="loggedin">
-        Missions
+    <md-list-item ng-click="null" ui-sref="clientprojects" ng-show="loggedin">
+        Mes Projets
     </md-list-item>
     <md-list-item ng-click="null" ui-sref="clientbesoins">
         Mes Besoins
@@ -37,6 +37,9 @@
 <md-list ng-controller="MenuController" ng-show="userType == 'comercial'" flex>
     <md-list-item ng-click="null" ui-sref="commercialmissions">
         Missions
+    </md-list-item>
+    <md-list-item ng-click="null" ui-sref="commercialprojects">
+        Projets Clients
     </md-list-item>
     <md-list-item ng-click="null" ui-sref="commercialbesoins">
         Besoins

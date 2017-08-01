@@ -1,24 +1,34 @@
 'use strict'
 
 
-module.exports = function() {
+module.exports = function () {
 
-    function controllerFn($scope, DialogService, ConsultantsService, MissionsService, $state, $stateParams) {
+    function controllerFn($scope, DialogService, MissionsService, $state, $stateParams) {
         $scope.interact = true;
-        $scope.details = function(m) {
+        $scope.details = function (m) {
             $state.go('commercialmissionsdetails', { id: m.id });
         }
 
-        $scope.$watch('$viewContentLoaded', function() {
+        
+
+        $scope.removeMembre = function (id) {
+            $scope.mission.team.splice(getMemberIndex(id), 1);
+        }
+
+        $scope.$watch('$viewContentLoaded', function () {
             if ($state.current.name == 'commercialmissions') {
-                $scope.missions = MissionsService.getAll();
+                MissionsService.getAllValidated().then(function (data) {
+                    $scope.missions = data;
+                });
             }
-            if ($state.current.name == 'commercialmissionsdetails') {
-                $scope.mission = MissionsService.getById($stateParams.id);
+            if ($state.current.name == 'commercialmissionsDetails') {
+                MissionsService.get($stateParams.id).then(function (response) {
+                    $scope.mission = response.data;
+                });
             }
         });
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'ConsultantsService', 'MissionsService', '$state', '$stateParams'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'MissionsService', '$state', '$stateParams'];
     angular.module('app').controller("CommercialMissionsController", controllerFn);
 }

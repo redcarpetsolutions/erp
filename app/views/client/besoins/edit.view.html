@@ -8,19 +8,44 @@
                 <menu></menu>
             </md-content>
         </md-sidenav>
-        <md-content layout="column" flex layout-padding>
-            <h1> Modifier Besoin </h1>
-            <md-content layout="column">
-                <md-input-container>
-                    <label>Titre</label>
-                    <input ng-model="besoin.title" required>
-                </md-input-container>
-                <md-input-container>
-                    <label>Description</label>
-                    <input ng-model="besoin.description" required>
-                </md-input-container>
-                <md-button class="md-raised md-accent" ng-click="edit()">Valider</md-button>
-                <md-button class="md-raised md-primary" ui-sref="clientbesoins">Retour</md-button>
+        <md-content flex layout-padding>
+            <md-content layout="column" flex layout-padding>
+                <h1> Modifier Besoin </h1>
+                <md-content layout="column">
+                    <md-input-container>
+                        <label>Titre</label>
+                        <input ng-model="besoin.title" required>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Description</label>
+                        <input ng-model="besoin.description" required>
+                    </md-input-container>
+                    <md-button class="md-raised md-accent" ng-click="edit()">Modifier</md-button>
+                    <md-button class="md-raised md-primary" ui-sref="clientbesoins">Retour</md-button>
+                </md-content>
+            </md-content>
+            <md-content ng-if="besoin.propositions.length>0" layout-padding flex>
+                <h3> Liste des Consultants deja proposer </h3>
+                <table class="data-table">
+                    <tr>
+                        <td>Photo</td>
+                        <td>Nom Prenom</td>
+                        <td>Experience</td>
+                        <td>Competence</td>
+                    </tr>
+
+                    <tr ng-repeat="c in besoin.propositions">
+                        <td><img ng-src="{{c.consultant.picture}}" style="height:128px">
+                        </td>
+                        <td>{{c.consultant.firstName}} {{c.consultant.lastName}}</td>
+                        <td>{{c.consultant.experience}}</td>
+                        <td>
+                            <p ng-repeat="s in c.consultant.skills">
+                                {{s.title}}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
             </md-content>
         </md-content>
     </div>

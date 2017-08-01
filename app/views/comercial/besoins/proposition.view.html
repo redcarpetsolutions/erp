@@ -23,31 +23,35 @@
                     </md-autocomplete>
                     <br>
                     <md-button class="md-raised md-primary" ng-click="valider()">Proposer</md-button>
+                    <md-button class="md-raised md-secondary" ui-sref="commercialbesoins()">Retour</md-button>
                 </form>
             </md-content>
-            <md-content ng-if="besoin.propositions" layout-padding flex>
-                <p> Liste des Consultants deja proposer </p>
-                <table class="data-table">
-                    <tr>
-                        <td>Photo</td>
-                        <td>Nom Prenom</td>
-                        <td>Salaire</td>
-                        <td>Payment</td>
-                        <td>Action</td>
-                    </tr>
+            <md-content ng-if="besoin.propositions && besoin.propositions.length>0" layout-padding flex>
+                    <p> Liste des Consultants deja proposer </p>
+                    <table class="data-table">
+                        <tr>
+                            <td>Photo</td>
+                            <td>Nom Prenom</td>
+                            <td>Experience</td>
+                            <td>Competence</td>
+                            <td>Action</td>
+                        </tr>
 
-                    <tr ng-repeat="c in besoin.propositions">
-                        <td><img ng-src="{{c.consultant.picture}}" style="height:128px">
-                        </td>
-                        <td>{{c.consultant.firstName}} {{c.consultant.lastName}}</td>
-                        <td>{{c.consultant.salary}}</td>
-                        <td>{{c.consultant.payment}}</td>
-                        <td>
-                            <md-button class="md-raised md-warn" ng-click="remove(c)" ng-if="canRemove(c)">Retirer</md-button>
-
-                        </td>
-                    </tr>
-                </table>
+                        <tr ng-repeat="c in besoin.propositions">
+                            <td><img ng-src="{{c.consultant.picture}}" style="height:128px">
+                            </td>
+                            <td>{{c.consultant.firstName}} {{c.consultant.lastName}}</td>
+                            <td>{{c.consultant.experience}}</td>
+                            <td>
+                                <p ng-repeat="s in c.consultant.skills">
+                                    {{s.title}}
+                                </p>
+                            </td>
+                            <td>
+                    <md-button class="md-raised md-warn" ng-click="remove(c)">Retirer</md-button>
+                            </td>
+                        </tr>
+                    </table>
             </md-content>
         </md-content>
     </div>

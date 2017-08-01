@@ -12,6 +12,7 @@
             <h1>Besoins</h1>
             <table class="data-table">
                 <tr>
+                    <td>Client</td>
                     <td>Titre</td>
                     <td>Description</td>
                     <td>Date</td>
@@ -26,7 +27,7 @@
                     <td>{{b.description}}</td>
                     <td>{{b.date | date}}</td>
                     <td>
-                        <md-button class="md-raised md-accent" ui-sref="besoinsEdit({id:b.id})">Modifier</md-button>
+                        <md-button class="md-raised md-accent" ui-sref="besoinsDetails({id:b.id})">Details</md-button>
                     </td>
                 </tr>
             </table>

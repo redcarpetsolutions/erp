@@ -3,7 +3,7 @@
 
 module.exports = function () {
 
-    function controllerFn($scope, DialogService, ConsultantsService, MissionsService, $state, $stateParams) {
+    function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams) {
         $scope.interact = true;
 
         $scope.details = function (m) {
@@ -45,9 +45,11 @@ module.exports = function () {
 
         ///Task Management
         function getTaskIndex(title) {
-            for (var i = 0; i < $scope.mission.tasks.length; i++) {
-                if ($scope.mission.tasks[i].title == title) {
-                    return i;
+            if ($scope.mission.tasks) {
+                for (var i = 0; i < $scope.mission.tasks.length; i++) {
+                    if ($scope.mission.tasks[i].title == title) {
+                        return i;
+                    }
                 }
             }
             return -1;
@@ -72,31 +74,40 @@ module.exports = function () {
         $scope.$watch('$viewContentLoaded', function () {
 
             if ($state.current.name == 'missions') {
-                $scope.missions = MissionsService.getAll();
+                MissionsService.getAllValidated().then(function (data) {
+                    $scope.missions = data;
+                });
             }
 
             if ($state.current.name == 'missionAdd') {
-                $scope.consultants = ConsultantsService.getAll();
-                $scope.selected = ConsultantsService.getById(2);
+                UsersService.getAllConsultant().then(function (data) {
+                    $scope.consultants = data;
+                    $scope.selected = $scope.consultants[0];
+                });
                 $scope.mission = new Object();
                 $scope.mission.startDate = new Date();
                 $scope.mission.endDate = new Date();
                 $scope.mission.team = new Array();
-                $scope.mission.leader = ConsultantsService.getById(1);
             }
 
             if ($state.current.name == 'missionDetails') {
-                $scope.mission = MissionsService.getById($stateParams.id);
+                MissionsService.get($stateParams.id).then(function (response) {
+                    $scope.mission = response.data;
+                });
             }
 
             if ($state.current.name == 'missionEdit') {
-                $scope.consultants = ConsultantsService.getAll();
-                $scope.selected = ConsultantsService.getById(2);
-                $scope.mission = MissionsService.getById($stateParams.id);
+                UsersService.getAllConsultant().then(function (data) {
+                    $scope.consultants = data;
+                    $scope.selected = $scope.consultants[0];
+                });
+                MissionsService.get($stateParams.id).then(function (response) {
+                    $scope.mission = response.data;
+                });
             }
         });
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'ConsultantsService', 'MissionsService', '$state', '$stateParams'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams'];
     angular.module('app').controller("MissionsController", controllerFn);
 }

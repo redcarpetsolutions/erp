@@ -1,41 +1,18 @@
 'use strict'
+var config = require('./config.json');
 
 
-module.exports = function() {
+module.exports = function () {
 
-    var propositions = [];
-
-    function serviceFn() {
-        this.getAll = function() {
-            return propositions;
+    function serviceFn($http) {
+        this.add = function (proposition) {
+            return $http.post(config.url + "/propositions", proposition);
         }
-
-        function getIndex(id) {
-            for (var i = 0; i < propositions.length; i++) {
-                if (propositions[i].id == id) {
-                    return i;
-                }
-            }
-        }
-
-        function remove(index) {
-            propositions.splice(index, 1);
-        }
-        this.getById = function(id) {
-            return propositions[getIndex(id)];
-        }
-        this.add = function(besoin) {
-            propositions.push(besoin);
-        }
-        this.update = function(id, besoin) {
-            remove(getIndex(id));
-            propositions.push(besoin);
-        }
-
-        this.getByClient = function(id) {
-            return propositions;
+        this.remove = function (id) {
+            return $http.delete(config.url + "/propositions/" + id);
         }
     }
 
+    serviceFn.$inject = ['$http'];
     angular.module('app').service("PropositionService", serviceFn);
 }

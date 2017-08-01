@@ -1,0 +1,49 @@
+<div ng-controller="ClientProjectsController" layout="column" ng-cloak>
+    <md-toolbar>
+        <toolbar></toolbar>
+    </md-toolbar>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true" md-whiteframe="4">
+            <md-content layout-padding>
+                <menu></menu>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding flex>
+            <h1>Mes Projets</h1>
+            <md-button class="md-raised md-primary" ui-sref="clientprojectsAdd">Nouvelle Missions</md-button>
+            <p> Vous pouvez deposer une requette pour votre projet grace a cet section.</p>
+            <p> Une fois votre demande deposee un administrateur ou un  commercial va se charger de la traiter et lui affecter l'equipe convenable</p>
+            <table class="data-table">
+                <tr>
+                    <td>Titre</td>
+                    <td>Date De Debut</td>
+                    <td>Date De Fin</td>
+                    <td>Leader</td>
+                    <td>Methodologie</td>
+                    <td>Technologie</td>
+                    <td>Valide</td>
+                    <td>Action</td>
+                </tr>
+
+                <tr ng-repeat="m in missions">
+                    <td>{{m.title}}</td>
+                    <td>{{m.startDate | date}}</td>
+                    <td>{{m.endDate | date}}</td>
+                    <td>{{m.leader.firstName}} {{m.leader.lastName}}
+                        <span ng-if="!m.leader">Non Affecte</span>
+                    </td>
+                    <td>{{m.method}}</td>
+                    <td>{{m.technology}}</td>
+                    <td>
+                        <span ng-if="m.validated">Validee</span>
+                        <span ng-if="!m.validated">Non Validee</span>
+                    </td>
+                    <td>
+                        <md-button class="md-raised md-primary" ng-click="details(m)">Details</md-button>
+                        <md-button class="md-raised md-accent" ng-if="!m.validated" ui-sref="clientprojectsEdit({id:m.id})">Modifier</md-button>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </div>
+</div>

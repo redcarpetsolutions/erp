@@ -1,28 +1,32 @@
 'use strict'
+var config = require('./config.json');
 
 
-module.exports = function() {
+module.exports = function () {
+    var besoins = [];
 
-    var besoins = [{
-        id: 1,
-        title: "Application Angular",
-        description: "Developpement d'une application angular",
-        date: new Date(),
-        user: {
-            id: 3,
-            firstName: "Emna",
-            lastName: "Khemis",
-            salary: "100",
-            payment: "daily",
-            picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-1/10645271_10203814886804607_5720282964011063521_n.jpg?oh=954f64e6236b4c29b27d269b3edfbdec&oe=5975A525"
-        }
-    }];
+    function serviceFn($http, $q) {
 
-    function serviceFn() {
-        this.getAll = function() {
-            return besoins;
+        this.getAll = function () {
+            return $http.get(config.url + "/needs");
         }
 
+        this.getByClient = function (id) {
+            return $q(function (resolve, reject) {
+                $http.get(config.url + "/needs").then(function (response) {
+                    var needs = response.data;
+                    var ret = new Array();
+                    needs.forEach(function (m) {
+                        if (m.client.id === id) {
+                            ret.push(m);
+                        }
+                    }, this);
+                    resolve(ret);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
         function getIndex(id) {
             for (var i = 0; i < besoins.length; i++) {
                 if (besoins[i].id == id) {
@@ -30,25 +34,18 @@ module.exports = function() {
                 }
             }
         }
+        this.getById = function (id) {
+            return $http.get(config.url + "/needs/" + id);
+        }
+        this.add = function (besoin) {
+            return $http.post(config.url + "/needs", besoin);
 
-        function remove(index) {
-            besoins.splice(index, 1);
         }
-        this.getById = function(id) {
-            return besoins[getIndex(id)];
-        }
-        this.add = function(besoin) {
-            besoins.push(besoin);
-        }
-        this.update = function(id, besoin) {
-            remove(getIndex(id));
-            besoins.push(besoin);
-        }
-
-        this.getByClient = function(id) {
-            return besoins;
+        this.update = function (id, besoin) {
+            return $http.put(config.url + "/needs/" + id, besoin);
         }
     }
+    serviceFn.$inject = ['$http', '$q'];
 
     angular.module('app').service("BesoinsService", serviceFn);
 }

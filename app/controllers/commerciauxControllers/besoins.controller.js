@@ -3,7 +3,7 @@
 
 module.exports = function () {
 
-    function controllerFn($scope, DialogService, BesoinsService, $state, $stateParams, ConsultantsService, StoreService) {
+    function controllerFn($scope, DialogService, BesoinsService, $state, $stateParams, UsersService, StoreService, PropositionService) {
         $scope.interact = true;
 
         $scope.proposer = function (id) {
@@ -11,11 +11,17 @@ module.exports = function () {
         }
         $scope.$watch('$viewContentLoaded', function () {
             if ($state.current.name == 'commercialbesoins') {
-                $scope.besoins = BesoinsService.getAll();
+                BesoinsService.getAll().then(function (response) {
+                    $scope.besoins = response.data;
+                });
             }
             if ($state.current.name == 'commercialbesoinsprop') {
-                $scope.besoin = BesoinsService.getById($stateParams.id);
-                $scope.consultants = ConsultantsService.getAll();
+                BesoinsService.getById($stateParams.id).then(function (response) {
+                    $scope.besoin = response.data;
+                });
+                UsersService.getAllConsultant().then(function (data) {
+                    $scope.consultants = data;
+                });
             }
         });
 
@@ -38,25 +44,21 @@ module.exports = function () {
         $scope.valider = function () {
             if ($scope.consultant) {
                 var proposition = {
+                    consultant: $scope.consultant,
                     user: StoreService.getCurrentUser(),
-                    consultant: $scope.consultant
+                    need : $scope.besoin
                 }
-                if ($scope.besoin.propositions) {
-                    var verif = true;
-                    for (var j = 0; j < $scope.besoin.propositions.length; j++) {
-                        if ($scope.besoin.propositions[j].consultant.id === $scope.consultant.id) {
-                            verif = false;
-                            break;
-                        }
+                var verif = true;
+                for (var j = 0; j < $scope.besoin.propositions.length; j++) {
+                    if ($scope.besoin.propositions[j].consultant.id === $scope.consultant.id) {
+                        verif = false;
+                        break;
                     }
-                    if (verif) {
-                        $scope.besoin.propositions.push(proposition);
-                        BesoinsService.update($scope.besoin.id, $scope.besoin);
-                    }
-                } else {
-                    $scope.besoin.propositions = new Array();
-                    $scope.besoin.propositions.push(proposition);
-                    BesoinsService.update($scope.besoin.id, $scope.besoin);
+                }
+                if (verif) {
+                    PropositionService.add(proposition).then(function(response){
+                        $scope.besoin.propositions.push(response.data);
+                    });
                 }
             }
         }
@@ -74,12 +76,12 @@ module.exports = function () {
                     && $scope.besoin.propositions[j].user.id === StoreService.getCurrentUser().id
                 ) {
                     $scope.besoin.propositions.splice(j, 1);
-                    BesoinsService.update($scope.besoin.id, $scope.besoin);
+                    PropositionService.remove(c.id);
                 }
             }
         }
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'BesoinsService', '$state', '$stateParams', 'ConsultantsService', 'StoreService'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'BesoinsService', '$state', '$stateParams', 'UsersService', 'StoreService', 'PropositionService'];
     angular.module('app').controller("CommerciauxBesoinsController", controllerFn);
 }

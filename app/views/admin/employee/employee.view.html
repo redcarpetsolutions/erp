@@ -1,4 +1,4 @@
-<div ng-controller="ComercialConsultantController" layout="column" ng-cloak>
+<div ng-controller="EmployeeController" layout="column" ng-cloak>
     <md-toolbar>
         <toolbar></toolbar>
     </md-toolbar>
@@ -9,28 +9,27 @@
             </md-content>
         </md-sidenav>
         <md-content layout-padding flex>
-            <h1>Liste Des Consultants</h1>
+            <h1>Employers</h1>
+            <md-button class="md-raised md-primary" ui-sref="employeeAdd">Nouvel Employer</md-button>
             <table class="data-table">
                 <tr>
                     <td>Photo</td>
                     <td>Nom Prenom</td>
                     <td>Salaire</td>
                     <td>Payment</td>
-                    <td>Competence</td>
+                    <td>Action</td>
                 </tr>
 
-                <tr ng-repeat="c in consultants">
+                <tr ng-repeat="c in employees">
                     <td><img ng-src="{{c.picture}}" style="height:128px">
                     </td>
                     <td>{{c.firstName}} {{c.lastName}}</td>
                     <td>{{c.salary}}</td>
                     <td>{{c.payment}}</td>
                     <td>
-                        <p ng-repeat="s in c.skills">
-                            {{s.title}}
-                        </p>
+                        <md-button class="md-raised md-accent" ui-sref="employeeEdit({id:c.id})">Modifier</md-button>
                     </td>
-                </p>
+                </tr>
             </table>
         </md-content>
     </div>

@@ -1,4 +1,4 @@
-<div ng-controller="MissionsController" layout="column" ng-cloak>
+<div ng-controller="ClientProjectsController" layout="column" ng-cloak>
     <md-toolbar>
         <toolbar></toolbar>
     </md-toolbar>
@@ -32,15 +32,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <md-button class="md-raised md-accent" ui-sref="missionEdit({id:mission.id})">Modifier</md-button>
-                                <md-button class="md-raised md-primary" ui-sref="missions">Retour</md-button>
+                                <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
                             </td>
                             <td>
                             </td>
                         </tr>
                     </table>
                 </md-content>
-                <md-content flex="50">
+                <md-content flex="50" ng-if="mission.validated">
                     <h2> Equipe</h2>
                     <md-list>
                         <md-list-item ng-click="null" class="md-3-line">
@@ -65,9 +64,9 @@
                     </md-list>
                 </md-content>
             </md-content>
-            <md-divider>
+            <md-divider ng-if="mission.validated">
             </md-divider>
-            <md-content ng-if="mission.tasks && mission.tasks.length > 0">
+            <md-content ng-if="mission.validated">
                 <h2> Tache</h2>
                 <md-list>
                     <md-list-item ng-repeat="e in mission.tasks" ng-click="null" class="md-3-line">

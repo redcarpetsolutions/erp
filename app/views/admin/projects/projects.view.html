@@ -1,0 +1,40 @@
+<div ng-controller="ProjectsController" layout="column" ng-cloak>
+    <md-toolbar>
+        <toolbar></toolbar>
+    </md-toolbar>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true" md-whiteframe="4">
+            <md-content layout-padding>
+                <menu></menu>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding flex>
+            <h1>Projets</h1>
+            <md-button class="md-raised md-primary" ui-sref="missionAdd">Nouveau Projet</md-button>
+            <table class="data-table">
+                <tr>
+                    <td>Titre</td>
+                    <td>Date De Debut</td>
+                    <td>Date De Fin</td>
+                    <td>Leader</td>
+                    <td>Methodologie</td>
+                    <td>Technologie</td>
+                    <td>Action</td>
+                </tr>
+
+                <tr ng-repeat="m in projects">
+                    <td>{{m.title}}</td>
+                    <td>{{m.startDate | date}}</td>
+                    <td>{{m.endDate| date}}</td>
+                    <td>{{m.leader.firstName}} {{m.leader.lastName}}
+                    </td>
+                    <td>{{m.method}}</td>
+                    <td>{{m.technology}}</td>
+                    <td>
+                        <md-button class="md-raised md-primary" ng-click="details(m)">Details</md-button>
+                    </td>
+                </tr>
+            </table>
+        </md-content>
+    </div>
+</div>
