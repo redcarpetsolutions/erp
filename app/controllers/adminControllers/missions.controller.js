@@ -5,7 +5,6 @@ module.exports = function () {
 
     function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams) {
         $scope.interact = true;
-
         $scope.details = function (m) {
             $state.go('missionDetails', { id: m.id });
         }

@@ -13,7 +13,10 @@
             <md-content layout="colunm" layout-padding>
                 <md-content flex="100" layout="column">
                     <h2> Information</h2>
-                    <p>Une fois cette mission cree il faut attendre la confirmation d'un administrateur ainsi que l'affectation de sont <equipe></equipe></p>
+                    <p>Une fois cette mission cree il faut attendre la confirmation d'un administrateur ainsi que l'affectation
+                        de sont
+                        <equipe></equipe>
+                    </p>
                     <md-input-container>
                         <label>Titre</label>
                         <input ng-model="mission.title" required>
@@ -27,6 +30,15 @@
                         <md-datepicker ng-model="mission.endDate" md-placeholder="Enter date"></md-datepicker>
                     </md-input-container>
                     <md-input-container>
+                        <label>Document</label>
+                        <div style="margin-top:50px" ng-show="!mission.path">
+                            <div on-complete="saved(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file" on-success="onSuccess(response)"></div>
+                        </div>
+                        <div style="margin-top:50px" ng-show="mission.path">
+                            Fichier Charger!
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
                         <label>Methodologie</label>
                         <input ng-model="mission.method" required>
                     </md-input-container>
@@ -37,8 +49,8 @@
                 </md-content>
             </md-content>
             <md-divider>
-            <md-button class="md-raised md-accent" ng-click="add()">Confirmer</md-button>
-            <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
+                <md-button class="md-raised md-accent" ng-click="add()">Confirmer</md-button>
+                <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
         </md-content>
     </div>
 </div>

@@ -36,6 +36,22 @@ module.exports = function () {
                 });
             });
         }
+        this.getAllAdmins=function(){
+            return $q(function(resolve,reject){
+                $http.get(config.url+"/users").then(function (response) {
+                    var users = response.data;
+                    var ret = new Array();
+                    users.forEach(function (u) {
+                        if (u.role==="admin") {
+                            ret.push(u);
+                        }
+                    }, this);
+                    resolve(ret);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
         this.get = function(id){
             return $http.get(config.url+"/users/"+id);
         }

@@ -3,12 +3,17 @@
 
 module.exports = function () {
 
-    function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams) {
+    function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams, EmailService) {
         $scope.interact = true;
 
         $scope.edit = function () {
             MissionsService.update($scope.mission.id, $scope.mission).then(function () {
-                $state.go('commercialprojects');
+                UsersService.getAllAdmins().then(data => {
+                    data.forEach(e => {
+                        EmailService.send(e.email, "Projet " + $scope.mission.title, "un commercial a proposer des consultants pour le projet " + $scope.mission.title)
+                    });
+                    $state.go('commercialprojects');
+                });
             });
         }
 
@@ -51,6 +56,6 @@ module.exports = function () {
         });
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams', "EmailService"];
     angular.module('app').controller("CommercialProjectsController", controllerFn);
 }

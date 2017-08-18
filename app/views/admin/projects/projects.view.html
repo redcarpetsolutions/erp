@@ -9,8 +9,7 @@
             </md-content>
         </md-sidenav>
         <md-content layout-padding flex>
-            <h1>Projets</h1>
-            <md-button class="md-raised md-primary" ui-sref="missionAdd">Nouveau Projet</md-button>
+            <h1>Propositions</h1>
             <table class="data-table">
                 <tr>
                     <td>Titre</td>
@@ -22,7 +21,7 @@
                     <td>Action</td>
                 </tr>
 
-                <tr ng-repeat="m in projects">
+                <tr ng-repeat="m in projects" ng-if="(m.leader&&m.leader!==null)||(m.team && m.team.length>0)">
                     <td>{{m.title}}</td>
                     <td>{{m.startDate | date}}</td>
                     <td>{{m.endDate| date}}</td>

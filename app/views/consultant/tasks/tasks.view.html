@@ -1,0 +1,34 @@
+<div ng-controller="TasksController" layout="column" ng-cloak>
+    <md-toolbar>
+        <toolbar></toolbar>
+    </md-toolbar>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true" md-whiteframe="4">
+            <md-content layout-padding>
+                <menu></menu>
+            </md-content>
+        </md-sidenav>
+        <md-content layout-padding flex>
+            <h1>Mes Taches</h1>
+
+            <div ng-repeat="m in missions">
+                <table class="data-table">
+                    <tr>
+                        <td>Titre</td>
+                        <td>Date De Debut</td>
+                        <td>Date De Fin</td>
+                        <td>Action</td>
+                    </tr>
+
+                    <tr ng-repeat="t in m.tasks" ng-if="t.responsable.id === user.id">
+                        <td>{{t.title}}</td>
+                        <td>{{t.startDate | date}}</td>
+                        <td>{{t.endDate | date}}</td>
+                        <td>Action</td>
+                    </tr>
+                </table>
+                <hr>
+            </div>
+        </md-content>
+    </div>
+</div>

@@ -26,6 +26,12 @@
                         <md-datepicker ng-model="mission.endDate" md-placeholder="Enter date"></md-datepicker>
                     </md-input-container>
                     <md-input-container>
+                        <label>Document</label>
+                        <div style="margin-top:50px">
+                            <div on-complete="saved(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file" on-success="onSuccess(response)"></div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
                         <label>Methodologie</label>
                         <input ng-model="mission.method" required>
                     </md-input-container>

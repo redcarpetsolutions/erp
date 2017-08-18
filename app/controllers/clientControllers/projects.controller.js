@@ -8,9 +8,10 @@ module.exports = function () {
         $scope.details = function (m) {
             $state.go('clientprojectsDetails', { id: m.id });
         }
-
+        $scope.mission = {};
         $scope.add = function () {
             $scope.mission.client = StoreService.getCurrentUser();
+            $scope.mission.validated = false;
             MissionsService.add($scope.mission).then(function (response) {
                 $state.go('clientprojectsDetails', { id: response.data.id });
             });
@@ -26,6 +27,11 @@ module.exports = function () {
             MissionsService.delete($scope.mission.id).then(function (response) {
                 $state.go('clientprojects', { id: response.data.id });
             });
+        }
+
+        $scope.saved = function(response){
+            console.log(response);
+            $scope.mission.path = response.data.filename;
         }
 
         $scope.$watch('$viewContentLoaded', function () {

@@ -1,54 +1,33 @@
 'use strict'
 
 
-module.exports = function() {
+module.exports = function () {
 
-    function controllerFn($scope, DialogService, $state) {
+    function controllerFn($scope, DialogService, $state, AuthService) {
         $scope.interact = true;
 
 
-        $scope.login = function() {
-            if ($scope.user.username == "admin" && $scope.user.password == "admin") {
-                localStorage.sk_user = JSON.stringify({
-                    id: 1,
-                    firstName: "Salma",
-                    lastName: "Khemis",
-                    salary: "300",
-                    payment: "daily",
-                    role: 'admin',
-                    picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-9/17021563_10210372323757483_3670622109916565036_n.jpg?oh=48af05b5efa56778c90a3956784b652d&oe=59BC0FE4"
-                });
-                $state.go("missions");
-            } else if ($scope.user.username == "client" && $scope.user.password == "client") {
-                localStorage.sk_user = JSON.stringify({
-                    id: 1,
-                    firstName: "Salma",
-                    lastName: "Khemis",
-                    salary: "300",
-                    payment: "daily",
-                    role: 'client',
-                    picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-9/17021563_10210372323757483_3670622109916565036_n.jpg?oh=48af05b5efa56778c90a3956784b652d&oe=59BC0FE4"
-                });
-                $state.go("profile");
-            } else if ($scope.user.username == "comercial" && $scope.user.password == "comercial") {
-                localStorage.sk_user = JSON.stringify({
-                    id: 1,
-                    firstName: "Salma",
-                    lastName: "Khemis",
-                    salary: "300",
-                    payment: "daily",
-                    role: 'comercial',
-                    picture: "https://scontent.ftun2-1.fna.fbcdn.net/v/t1.0-9/17021563_10210372323757483_3670622109916565036_n.jpg?oh=48af05b5efa56778c90a3956784b652d&oe=59BC0FE4"
-                });
-                $state.go("commercialbesoins");
-            } else {
-                DialogService.alert('Erreur', 'Mauvais Login ou Mot De Passe', 'Ok');
-            }
+        $scope.login = function () {
+            AuthService.login($scope.user).then((response) => {
+                let user = response.data;
+
+                localStorage.sk_user = JSON.stringify(
+                    user
+                );
+                if (user.role === "admin") {
+                    $state.go("missions");
+                } else if (user.role === "client") {
+                    $state.go("clientbesoins");
+                } else if (user.role === "comercial") {
+                    $state.go("commercialmissions");
+                } else if (user.role === "consultant") {
+                    $state.go("consultantTasks");
+                } 
+            });
         }
-        
 
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', '$state'];
+    controllerFn.$inject = ['$scope', 'DialogService', '$state', 'AuthService'];
     angular.module('app').controller("AuthenticationController", controllerFn);
 }

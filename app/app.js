@@ -3,6 +3,7 @@
 require('angular');
 require('angular-material');
 require('angular-ui-router');
+require('angular-upload')
 require('angular-material/angular-material.css');
 require('./style.css');
 
@@ -75,7 +76,7 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
     });
    
 
-    ///////////////////////////////Consultant Routing
+    ///////////////////////////////Commercial Routing
     ///Besoins
     $stateProvider.state('commercialbesoins', {
         url: '/commercial/besoins',
@@ -161,11 +162,26 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         templateUrl: "views/admin/besoins/details.view.html"
     });
 
+
+    ////////////////////////////////////////////////////////
+    //////////Consultant
+    ////////////////////////////////////////////////////////
+
+
+    ///Tasks
+    $stateProvider.state('consultantTasks', {
+        url: '/consultant/tasks',
+        templateUrl: "views/consultant/tasks/tasks.view.html"
+    });
+
+
+
+
     $urlRouterProvider.otherwise('/');
 }
 configFn.$inject = ['$mdThemingProvider', '$stateProvider', '$urlRouterProvider'];;
 
-angular.module('app', ['ngMaterial', 'ui.router']).config(configFn);
+angular.module('app', ['ngMaterial', 'ui.router','lr.upload']).config(configFn);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Services
@@ -177,6 +193,8 @@ require('./services/users.service.js')();
 require('./services/besoins.service.js')();
 require('./services/store.service.js')();
 require('./services/proposition.service.js')();
+require('./services/auth.service.js')();
+require('./services/email.service.js')();
 
 
 
@@ -210,3 +228,6 @@ require('./controllers/commerciauxControllers/besoins.controller.js')();
 require('./controllers/commerciauxControllers/consultants.controller.js')();
 require('./controllers/commerciauxControllers/projects.controller.js')();
 require('./controllers/commerciauxControllers/missions.controller.js')();
+
+
+require('./controllers/consultantControllers/tasks.controller.js')();

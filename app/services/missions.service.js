@@ -61,6 +61,30 @@ module.exports = function () {
             });
         }
 
+        this.getByConsultant = function (id) {
+            return $q(function (resolve, reject) {
+                $http.get(config.url + "/missions").then(function (response) {
+                    var missions = response.data;
+                    var ret = new Array();
+                    missions.forEach(function (m) {
+                        console.log(m);
+                        if (m.leader.id === id) {
+                            ret.push(m);
+                        }
+                        if (m.team) {
+                            m.team.forEach((t) => {
+                                if (t.id === id) {
+                                    ret.push(m);
+                                }
+                            });
+                        }
+                    }, this);
+                    resolve(ret);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
 
 
         this.add = function (mission) {

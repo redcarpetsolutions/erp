@@ -11,11 +11,25 @@
         <md-content layout-padding layout="column">
             <h1> Profile </h1>
             <div layout="row">
-                <img src="{{user.picture}}" style="height: 200px;width:200px;" />
+                <div>
+                    <img src="{{user.picture}}" style="height: 200px;width:200px;" />
+                    <hr>
+                    <h3 ng-show="user.cv"><a href="{{user.cv}}">Telecharger CV</a></h3>
+
+                </div>
                 <div style="margin-left:30px;">
                     <h2>{{user.firstName}} {{user.lastName}}</h2>
-                    <p>{{user.firstName}} {{user.lastName}} est la meilleur</p>
-                    <!--<md-button>Edit</md-button>-->
+                    <h3>Modifier Photo</h3>
+                    <div style="margin-top:50px">
+                        <div on-complete="photo(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file" on-success="onSuccess(response)"></div>
+                    </div>
+                    <hr>
+                    <div ng-if="user.role !== 'client'">
+                        <h3>Modifier CV</h3>
+                        <div style="margin-top:50px">
+                            <div on-complete="cv(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file" on-success="onSuccess(response)"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </md-content>
