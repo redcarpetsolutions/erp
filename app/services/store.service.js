@@ -2,7 +2,9 @@
 
 
 module.exports = function () {
-    let currentUser = JSON.parse(localStorage.sk_user);
+    if (localStorage.sk_user) {
+        let currentUser = JSON.parse(localStorage.sk_user);
+    }
     function serviceFn() {
         this.setCurrentUser = function (user) {
             currentUser = user;

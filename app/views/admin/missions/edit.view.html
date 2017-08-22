@@ -10,30 +10,38 @@
         </md-sidenav>
         <!--  Information   -->
         <md-content layout="column" flex layout-padding>
+            <md-content layout="column">
+                <h2> Information</h2>
+                <md-input-container>
+                    <label>Titre</label>
+                    <input ng-model="mission.title" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Date De Debut</label>
+                    <md-datepicker ng-model="mission.startDate" md-placeholder="Enter date"></md-datepicker>
+                </md-input-container>
+                <md-input-container>
+                    <label>Date De Fin</label>
+                    <md-datepicker ng-model="mission.endDate" md-placeholder="Enter date"></md-datepicker>
+                </md-input-container>
+                <md-input-container>
+                    <label>Methodologie</label>
+                    <input ng-model="mission.method" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Technologie</label>
+                    <input ng-model="mission.technology" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>PDF</label>
+                    <div style="margin-top:30px" on-complete="pdf(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file"
+                        on-success="onSuccess(response)"></div>
+                </md-input-container>
+            </md-content>
+
+            <md-divider>
+            </md-divider>
             <md-content layout="colunm" layout-padding>
-                <md-content flex="50" layout="column">
-                    <h2> Information</h2>
-                    <md-input-container>
-                        <label>Titre</label>
-                        <input ng-model="mission.title" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Debut</label>
-                        <md-datepicker ng-model="mission.startDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Fin</label>
-                        <md-datepicker ng-model="mission.endDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Methodologie</label>
-                        <input ng-model="mission.method" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Technologie</label>
-                        <input ng-model="mission.technology" required>
-                    </md-input-container>
-                </md-content>
                 <!--  Equipe   -->
                 <md-content flex="50">
                     <h2> Equipe</h2>
@@ -73,12 +81,30 @@
                     </md-select>
                     <md-button class="md-raised md-primary" ng-click="addMembre()">Ajouter Membre</md-button>
                 </md-content>
+                <md-content flex="50">
+                    <md-list>
+                        <h2> Consultants</h2>
+                        <md-list-item ng-repeat="e in mission.commercials" ng-click="removeCommercial(e.id)" class="md-3-line">
+                            <img ng-src="{{e.picture}}" class="md-avatar" />
+                            <div class="md-list-item-text" layout="column">
+                                <h3>
+                                    {{e.firstName}} {{e.lastName}}</h3>
+                                <h4>Membre</h4>
+                                <p>{{e.salary}} {{e.payment}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <md-select ng-model="selected">
+                        <md-option ng-repeat="c in commercials" ng-value="c">
+                            {{c.firstName}} {{c.lastName}}
+                        </md-option>
+                    </md-select>
+                    <md-button class="md-raised md-primary" ng-click="addCommercial()">Ajouter Commercial</md-button>
+                </md-content>
             </md-content>
-            <md-divider>
-            </md-divider>
             <!--  Taches   -->
-            <!--<md-content>
-                <h2> Tache</h2>
+            <md-content>
+                <h2> Taches</h2>
                 <md-list>
                     <md-list-item ng-repeat="e in mission.tasks" ng-click="removeTask(e.title)" class="md-3-line">
                         <div class="md-list-item-text" layout="column">
@@ -122,7 +148,7 @@
                         <md-button class="md-raised md-primary" ng-click="addTask()">Ajouter Tache</md-button>
                     </md-input-container>
                 </md-content>
-            </md-content>-->
+            </md-content>
             <md-button class="md-raised md-accent" ng-click="edit()">Modifier</md-button>
             <md-button class="md-raised md-primary" ui-sref="missionDetails({id:mission.id})">Retour</md-button>
         </md-content>

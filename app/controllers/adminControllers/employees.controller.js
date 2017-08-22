@@ -38,6 +38,14 @@ module.exports = function () {
                 });
             }
         });
+
+        $scope.photo=function(response){
+            $scope.employee.picture = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        }
+        $scope.cv=function(response){
+            $scope.employee.cv = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        }
+
     }
 
     controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', '$state', '$stateParams'];

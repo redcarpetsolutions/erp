@@ -12,6 +12,22 @@
             <h1> Nouveau Employee </h1>
             <md-content layout="column">
                 <md-input-container>
+                    <md-select ng-model="employee.role">
+                        <md-option ng-value="admin">
+                            admin
+                        </md-option>
+                        <md-option ng-value="client">
+                            client
+                        </md-option>
+                        <md-option ng-value="consultant">
+                            consultant
+                        </md-option>
+                        <md-option ng-value="comercial">
+                            commercial
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
                     <label>Nom</label>
                     <input ng-model="employee.firstName" required>
                 </md-input-container>

@@ -10,12 +10,16 @@ module.exports = function () {
         }
 
         $scope.add = function () {
-            MissionsService.add($scope.mission);
-            $state.go('missionDetails', { id: $scope.mission.id });
+            $scope.mission.validated = true;
+            $scope.mission.type = "interne";
+            MissionsService.add($scope.mission).then(function () {
+                $state.go('missions');
+            });
         }
         $scope.edit = function () {
-            MissionsService.update($scope.mission.id, $scope.mission);
-            $state.go('missionDetails', { id: $scope.mission.id });
+            MissionsService.update($scope.mission.id, $scope.mission).then(function () {
+                $state.go('missionDetails', { id: $scope.mission.id });
+            });
         }
 
 
@@ -39,7 +43,30 @@ module.exports = function () {
 
 
         $scope.removeMembre = function (id) {
-            $scope.mission.team.splice(getMemberIndex(id), 1);
+            $scope.mission.commercials.splice(getMemberIndex(id), 1);
+        }
+
+        /// commercial Management
+        function getCommercialIndex(id) {
+            for (var i = 0; i < $scope.mission.commercials.length; i++) {
+                if ($scope.mission.commercials[i].id == id) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        $scope.addCommercial = function () {
+            var idx = getMemberIndex($scope.selected.id);
+            if (idx === -1 && $scope.selected.id != $scope.mission.leader.id) {
+                $scope.mission.commercials.push($scope.selected);
+            } else {
+                DialogService.alert('Erreur', "Cette Personne fais deja partie des consultants", "OK")
+            }
+        }
+
+
+        $scope.removeCommercial = function (id) {
+            $scope.mission.commercials.splice(getMemberIndex(id), 1);
         }
 
         ///Task Management
@@ -54,12 +81,19 @@ module.exports = function () {
             return -1;
         }
         $scope.addTask = function () {
-            var idx = getTaskIndex($scope.task.title);
-            if (idx === -1 && $scope.task.title) {
-                $scope.mission.tasks.push($scope.task);
+            if ($scope.task.responsible) {
+                var idx = getTaskIndex($scope.task.title);
+                $scope.task.mission = { id: $scope.mission.id };
+
+                if (idx === -1 && $scope.task.title) {
+                    $scope.mission.tasks.push($scope.task);
+                } else {
+                    DialogService.alert('Erreur', "Une autre tache a deja ce titre", "OK")
+                }
             } else {
-                DialogService.alert('Erreur', "Une autre tache a deja ce titre", "OK")
+                DialogService.alert('Erreur', "Veuillez choisir un responsable", "OK")
             }
+
         }
 
 
@@ -68,7 +102,10 @@ module.exports = function () {
         }
 
 
-
+        //File Upload
+        $scope.pdf=function(response){
+            $scope.mission.path = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        }
 
         $scope.$watch('$viewContentLoaded', function () {
 
@@ -83,10 +120,15 @@ module.exports = function () {
                     $scope.consultants = data;
                     $scope.selected = $scope.consultants[0];
                 });
+                UsersService.getAllCommercials().then(function (data) {
+                    $scope.commercials = data;
+                    $scope.selected2 = $scope.commercials[0];
+                });
                 $scope.mission = new Object();
                 $scope.mission.startDate = new Date();
                 $scope.mission.endDate = new Date();
                 $scope.mission.team = new Array();
+                $scope.mission.commercials = new Array();
             }
 
             if ($state.current.name == 'missionDetails') {
@@ -99,6 +141,10 @@ module.exports = function () {
                 UsersService.getAllConsultant().then(function (data) {
                     $scope.consultants = data;
                     $scope.selected = $scope.consultants[0];
+                });
+                UsersService.getAllCommercials().then(function (data) {
+                    $scope.commercials = data;
+                    $scope.selected2 = $scope.commercials[0];
                 });
                 MissionsService.get($stateParams.id).then(function (response) {
                     $scope.mission = response.data;

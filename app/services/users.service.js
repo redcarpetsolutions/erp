@@ -20,6 +20,22 @@ module.exports = function () {
                 });
             });
         }
+        this.getAllCommercials=function(){
+            return $q(function(resolve,reject){
+                $http.get(config.url+"/users").then(function (response) {
+                    var users = response.data;
+                    var ret = new Array();
+                    users.forEach(function (u) {
+                        if (u.role==="comercial") {
+                            ret.push(u);
+                        }
+                    }, this);
+                    resolve(ret);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
         this.getAllEmployees=function(){
             return $q(function(resolve,reject){
                 $http.get(config.url+"/users").then(function (response) {
