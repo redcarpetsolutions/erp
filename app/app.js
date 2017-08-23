@@ -1,6 +1,7 @@
 'use strict'
 
 require('angular');
+
 require('angular-material');
 require('angular-ui-router');
 require('angular-upload')
@@ -61,7 +62,7 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/projects',
         templateUrl: "views/client/projects/projects.view.html"
     });
-     $stateProvider.state('clientprojectsAdd', {
+    $stateProvider.state('clientprojectsAdd', {
         url: '/projects/new',
         templateUrl: "views/client/projects/add.view.html"
     });
@@ -70,11 +71,11 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/projects/:id',
         templateUrl: "views/client/projects/details.view.html"
     });
-   $stateProvider.state('clientprojectsEdit', {
+    $stateProvider.state('clientprojectsEdit', {
         url: '/projects/:id/edit',
         templateUrl: "views/client/projects/edit.view.html"
     });
-   
+
 
     ///////////////////////////////Commercial Routing
     ///Besoins
@@ -130,7 +131,7 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         templateUrl: "views/admin/missions/edit.view.html"
     });
     ///Project
-     $stateProvider.state('projects', {
+    $stateProvider.state('projects', {
         url: '/admin/projects',
         templateUrl: "views/admin/projects/projects.view.html"
     });
@@ -173,7 +174,10 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/consultant/tasks',
         templateUrl: "views/consultant/tasks/tasks.view.html"
     });
-
+    $stateProvider.state('agenda', {
+        url: '/consultant/agenda',
+        templateUrl: "views/consultant/agenda/agenda.view.html"
+    });
 
 
 
@@ -181,7 +185,7 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
 }
 configFn.$inject = ['$mdThemingProvider', '$stateProvider', '$urlRouterProvider'];;
 
-angular.module('app', ['ngMaterial', 'ui.router','lr.upload']).config(configFn);
+angular.module('app', ['ngMaterial', 'ui.router', 'lr.upload']).config(configFn);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Services
@@ -231,3 +235,4 @@ require('./controllers/commerciauxControllers/missions.controller.js')();
 
 
 require('./controllers/consultantControllers/tasks.controller.js')();
+require('./controllers/consultantControllers/agenda.controller.js')();

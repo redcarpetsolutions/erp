@@ -67,7 +67,6 @@ module.exports = function () {
                     var missions = response.data;
                     var ret = new Array();
                     missions.forEach(function (m) {
-                        console.log(m);
                         if (m.leader.id === id) {
                             ret.push(m);
                         }
@@ -78,7 +77,7 @@ module.exports = function () {
                                 }
                             });
                         }
-                    }, this);
+                    });
                     resolve(ret);
                 }).catch(function (err) {
                     reject(err);

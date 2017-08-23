@@ -103,8 +103,8 @@ module.exports = function () {
 
 
         //File Upload
-        $scope.pdf=function(response){
-            $scope.mission.path = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        $scope.pdf = function (response) {
+            $scope.mission.path = "http://localhost:18080/erp-web/api/upload/" + response.data.filename;
         }
 
         $scope.$watch('$viewContentLoaded', function () {
@@ -112,6 +112,7 @@ module.exports = function () {
             if ($state.current.name == 'missions') {
                 MissionsService.getAllValidated().then(function (data) {
                     $scope.missions = data;
+                    $scope.display = $scope.missions;
                 });
             }
 
@@ -151,6 +152,23 @@ module.exports = function () {
                 });
             }
         });
+
+        ///Filter
+        $scope.filter = "";
+        $scope.display = new Array();
+        $scope.type = "";
+        $scope.filterUsers = function () {
+            $scope.display = new Array();
+            $scope.missions.forEach(function (e) {
+                if ((e.title.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1 ||
+                    e.leader.firstName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1 ||
+                    e.leader.lastName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1) &&
+                    (e.type === $scope.type || $scope.type === "")
+                ) {
+                    $scope.display.push(e);
+                }
+            });
+        }
     }
 
     controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams'];

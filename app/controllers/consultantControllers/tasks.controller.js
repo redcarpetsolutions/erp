@@ -12,7 +12,15 @@ module.exports = function () {
                 });
             }
         });
-
+        $scope.next = function (m, t) {
+            if (t.state === "To Do") {
+                t.state = "Doing";
+            }
+            else if (t.state === "Doing") {
+                t.state = "Done";
+            }
+            MissionsService.update(m.id, m);
+        }
     }
 
     controllerFn.$inject = ['$scope', 'StoreService', '$state', 'MissionsService'];

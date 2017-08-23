@@ -27,6 +27,7 @@ module.exports = function () {
             if ($state.current.name == 'employee') {
                 UsersService.getAllEmployees().then(function (data) {
                     $scope.employees = data;
+                    $scope.display = $scope.employees;
                 });
             }
 
@@ -35,17 +36,33 @@ module.exports = function () {
             if ($state.current.name == 'employeeEdit') {
                 UsersService.get($stateParams.id).then(function (response) {
                     $scope.employee = response.data;
+                    $scope.display = $scope.employees;
                 });
             }
         });
 
-        $scope.photo=function(response){
-            $scope.employee.picture = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        $scope.photo = function (response) {
+            $scope.employee.picture = "http://localhost:18080/erp-web/api/upload/" + response.data.filename;
         }
-        $scope.cv=function(response){
-            $scope.employee.cv = "http://localhost:18080/erp-web/api/upload/"+response.data.filename;
+        $scope.cv = function (response) {
+            $scope.employee.cv = "http://localhost:18080/erp-web/api/upload/" + response.data.filename;
         }
 
+        ///Filter
+        $scope.filter = "";
+        $scope.role = "";
+        $scope.display = new Array();
+        $scope.filterUsers = function () {
+            $scope.display = new Array();
+            $scope.employees.forEach(function (e) {
+                if ((e.firstName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1 ||
+                    e.lastName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1) &&
+                    (e.role === $scope.role)
+                ) {
+                    $scope.display.push(e);
+                }
+            });
+        }
     }
 
     controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', '$state', '$stateParams'];

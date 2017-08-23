@@ -9,20 +9,21 @@
             </md-content>
         </md-sidenav>
         <md-content layout="column" flex layout-padding>
-            <h1> Nouveau Employee </h1>
+            <h1> Ajouter Utilisateur </h1>
             <md-content layout="column">
                 <md-input-container>
+                    <label>Role</label>
                     <md-select ng-model="employee.role">
-                        <md-option ng-value="admin">
+                        <md-option value="admin">
                             admin
                         </md-option>
-                        <md-option ng-value="client">
+                        <md-option value="client">
                             client
                         </md-option>
-                        <md-option ng-value="consultant">
+                        <md-option value="consultant">
                             consultant
                         </md-option>
-                        <md-option ng-value="comercial">
+                        <md-option value="comercial">
                             commercial
                         </md-option>
                     </md-select>
@@ -35,11 +36,11 @@
                     <label>Prenom</label>
                     <input ng-model="employee.lastName" required>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container ng-show="employee.role==='consultant'">
                     <label>Salaire</label>
                     <input ng-model="employee.salary" required>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container ng-show="employee.role==='consultant'">
                     <label>Payment</label>
                     <md-select ng-model="employee.payment">
                         <md-option value="hourly">
@@ -51,8 +52,18 @@
                     </md-select>
                 </md-input-container>
                 <md-input-container>
+                    <label>password</label>
+                    <input type="password" ng-model="employee.password" required>
+                </md-input-container>
+                <md-input-container>
                     <label>Photo</label>
-                    <input ng-model="employee.picture" required>
+                    <div style="margin-top:30px" on-complete="photo(response)" upload-button url="http://localhost:18080/erp-web/api/upload"
+                        param="file" on-success="onSuccess(response)"></div>
+                </md-input-container>
+                <md-input-container ng-show="employee.role==='consultant'">
+                    <label>CV</label>
+                    <div style="margin-top:30px" on-complete="cv(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file"
+                        on-success="onSuccess(response)"></div>
                 </md-input-container>
                 <md-button class="md-raised md-accent" ng-click="add()">Ajouter</md-button>
                 <md-button class="md-raised md-primary" ui-sref="employee">Retour</md-button>

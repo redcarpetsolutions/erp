@@ -52,3 +52,15 @@
         Deconnexion
     </md-list-item>
 </md-list>
+
+<md-list ng-controller="MenuController" ng-show="userType == 'consultant'" flex>
+    <md-list-item ng-click="null" ui-sref="consultantTasks">
+        Mes Taches
+    </md-list-item>
+    <md-list-item ng-click="null" ui-sref="agenda">
+        Agenda
+    </md-list-item>
+    <md-list-item ng-click="logout()">
+        Deconnexion
+    </md-list-item>
+</md-list>

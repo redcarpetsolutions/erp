@@ -11,25 +11,38 @@
         <md-content layout-padding flex>
             <h1>Missions</h1>
             <md-button class="md-raised md-primary" ui-sref="missionAdd">Nouvelle Missions</md-button>
+            <md-input-container>
+                <label>Filter</label>
+                <input ng-model="filter" ng-change="filterUsers()">
+            </md-input-container>
+            <md-input-container>
+                <label>Type</label>
+                <md-select ng-model="type" ng-change="filterUsers()">
+                    <md-option value="interne">
+                        interne
+                    </md-option>
+                    <md-option value="externe">
+                        externe
+                    </md-option>
+                </md-select>
+            </md-input-container>
             <table class="data-table">
                 <tr>
                     <td>Titre</td>
                     <td>Date De Debut</td>
                     <td>Date De Fin</td>
                     <td>Leader</td>
-                    <td>Methodologie</td>
-                    <td>Technologie</td>
+                    <td>Type</td>
                     <td>Action</td>
                 </tr>
 
-                <tr ng-repeat="m in missions">
+                <tr ng-repeat="m in display">
                     <td>{{m.title}}</td>
                     <td>{{m.startDate | date}}</td>
                     <td>{{m.endDate| date}}</td>
                     <td>{{m.leader.firstName}} {{m.leader.lastName}}
                     </td>
-                    <td>{{m.method}}</td>
-                    <td>{{m.technology}}</td>
+                    <td>{{m.type}}</td>
                     <td>
                         <md-button class="md-raised md-primary" ng-click="details(m)">Details</md-button>
                         <md-button class="md-raised md-accent" ui-sref="missionEdit({id:m.id})">Modifier</md-button>

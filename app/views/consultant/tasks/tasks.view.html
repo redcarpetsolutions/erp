@@ -20,11 +20,15 @@
                         <td>Action</td>
                     </tr>
 
-                    <tr ng-repeat="t in m.tasks" ng-if="t.responsable.id === user.id">
+                    <tr ng-repeat="t in m.tasks" ng-if="t.responsible.id === user.id">
                         <td>{{t.title}}</td>
                         <td>{{t.startDate | date}}</td>
                         <td>{{t.endDate | date}}</td>
-                        <td>Action</td>
+                        <td>
+                            <md-button class="md-primary md-raised" ng-click="next(m,t)" ng-if="t.state==='To Do'">Doing</md-button>
+                            <md-button class="md-primary md-raised" ng-click="next(m,t)" ng-if="t.state==='Doing'">Done</md-button>
+                            <span ng-if="t.state==='Done'"><b>DONE</b></span>
+                        </td>
                     </tr>
                 </table>
                 <hr>

@@ -83,6 +83,12 @@ module.exports = function () {
         this.delete = function (id) {
             return $http.delete(config.url + "/users/" + id);
         }
+        this.addPointage = function (p) {
+            return $http.post(config.url + "/users/pointage",p);
+        }
+        this.removePointage = function (id) {
+            return $http.delete(config.url + "/users/pointage/" + id);
+        }
     }
     serviceFn.$inject=['$http','$q']
     angular.module('app').service("UsersService", serviceFn);

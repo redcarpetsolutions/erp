@@ -9,23 +9,44 @@
             </md-content>
         </md-sidenav>
         <md-content layout-padding flex>
-            <h1>Employers</h1>
-            <md-button class="md-raised md-primary" ui-sref="employeeAdd">Nouvel Employer</md-button>
+            <h1>Utilisateurs</h1>
+            <md-button class="md-raised md-primary" ui-sref="employeeAdd">Nouvel Utilisateur</md-button>
+            <md-input-container>
+                <label>Filter</label>
+                <input ng-model="filter" ng-change="filterUsers()">
+            </md-input-container>
+            <md-input-container>
+                <label>Role</label>
+                <md-select ng-model="role" ng-change="filterUsers()">
+                    <md-option value="admin">
+                        admin
+                    </md-option>
+                    <md-option value="consultant">
+                        consultant
+                    </md-option>
+                    <md-option value="comercial">
+                        comercial
+                    </md-option>
+                    <md-option value="client">
+                        client
+                    </md-option>
+                </md-select>
+            </md-input-container>
             <table class="data-table">
                 <tr>
                     <td>Photo</td>
                     <td>Nom Prenom</td>
-                    <td>Salaire</td>
-                    <td>Payment</td>
+                    <td>Role</td>
+                    <td>CV</td>
                     <td>Action</td>
                 </tr>
 
-                <tr ng-repeat="c in employees">
+                <tr ng-repeat="c in display">
                     <td><img ng-src="{{c.picture}}" style="height:128px">
                     </td>
                     <td>{{c.firstName}} {{c.lastName}}</td>
-                    <td>{{c.salary}}</td>
-                    <td>{{c.payment}}</td>
+                    <td>{{c.role}}</td>
+                    <td><a ng-if="c.role==='comercial'||c.role==='consultant'" href="{{c.cv}}">Telecharger</a></td>
                     <td>
                         <md-button class="md-raised md-accent" ui-sref="employeeEdit({id:c.id})">Modifier</md-button>
                     </td>

@@ -36,11 +36,11 @@
                     <label>Prenom</label>
                     <input ng-model="employee.lastName" required>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container ng-show="employee.role==='consultant'">
                     <label>Salaire</label>
                     <input ng-model="employee.salary" required>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container ng-show="employee.role==='consultant'">
                     <label>Payment</label>
                     <md-select ng-model="employee.payment">
                         <md-option value="hourly">
