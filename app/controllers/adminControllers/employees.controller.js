@@ -20,7 +20,11 @@ module.exports = function () {
                 $state.go('employee');
             });
         }
-
+        $scope.employeeDelete = function (id) {
+            UsersService.delete(id).catch(err=>{
+                DialogService.alert("Erreur","Ce consultant fais partie d'une Mission","OK");
+            });
+        }
 
         $scope.$watch('$viewContentLoaded', function () {
 

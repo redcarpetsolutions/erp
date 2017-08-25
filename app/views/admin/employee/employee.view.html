@@ -49,6 +49,7 @@
                     <td><a ng-if="c.role==='comercial'||c.role==='consultant'" href="{{c.cv}}">Telecharger</a></td>
                     <td>
                         <md-button class="md-raised md-accent" ui-sref="employeeEdit({id:c.id})">Modifier</md-button>
+                        <md-button class="md-raised md-warn" ng-click="employeeDelete(c.id)">Supprimer</md-button>
                     </td>
                 </tr>
             </table>
