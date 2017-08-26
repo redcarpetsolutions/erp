@@ -1,2 +1,11 @@
-<h1 class="md-toolbar-tools">
-    Arona Technology</h1>
+<div class="md-toolbar-tools" ng-controller="HeaderController">
+    <md-list-item style="float:right" ng-if="user.id">
+        <img ng-src="{{user.picture}}" class="md-avatar">
+        <h1>{{user.firstName}} {{user.lastName}}</h1>
+        <md-button class="md-fab md-mini md-primary" ng-click="logout()">
+            <img src="https://s-media-cache-ak0.pinimg.com/originals/78/1f/5e/781f5e34a93ab72dee2cc972946ca436.png" style="width:30px;height:30px;">
+        </md-button>
+    </md-list-item>
+    <h1>Arona Technology</h1>
+
+</div>

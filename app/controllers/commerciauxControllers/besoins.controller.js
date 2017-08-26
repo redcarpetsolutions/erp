@@ -57,6 +57,12 @@ module.exports = function () {
                 }
                 if (verif) {
                     PropositionService.add(proposition).then(function(response){
+                        UsersService.getAllAdmins().then(data => {
+                            data.forEach(e => {
+                                EmailService.send(e.email, "Besoin " + $scope.besoin.title, "un commercial a proposer le consultants "+proposition.consultant.firstName+" "+ proposition.consultant.firstName +" pour le besoin " + $scope.besoin.title)
+                            });
+                            $state.go('commercialprojects');
+                        });
                         $scope.besoin.propositions.push(response.data);
                     });
                 }

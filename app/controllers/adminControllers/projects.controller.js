@@ -24,11 +24,14 @@ module.exports = function () {
             if ($state.current.name == 'projects') {
                 MissionsService.getAllNonValidated().then(function (data) {
                     $scope.projects = data;
+                      
                 });
             }
             if ($state.current.name == 'projectsDetails') {
                 MissionsService.get($stateParams.id).then(function (response) {
                     $scope.project = response.data;
+                    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB2BAeujrcRfD1MDCCcfTan2i7-y0TR2E8&q=" + $scope.project.adresse);
+                    
                 });
             }
         });

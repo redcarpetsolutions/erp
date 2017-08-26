@@ -26,6 +26,21 @@ module.exports = function () {
                 }
             });
         }
+        $scope.user = {};
+        $scope.photo = function (response) {
+            $scope.user.picture = response.data.filename;
+            DialogService.alert("Succes", "Photo Envoyer Avec Success", "ok")
+        }
+        $scope.register = function () {
+            if ($scope.password === $scope.user.password && $scope.user.password && $scope.user.email) {
+                $scope.user.role = "client";
+                AuthService.register($scope.user).then((response) => {
+                    $state.go("login");
+                });
+            } else {
+                DialogService.alert("Erreur", "Les deux mot de passe doivent correspondre", "ok");
+            }
+        }
 
     }
 

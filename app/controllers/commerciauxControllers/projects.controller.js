@@ -51,6 +51,7 @@ module.exports = function () {
                         $scope.consultants = data;
                     });
                     $scope.mission = response.data;
+                    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB2BAeujrcRfD1MDCCcfTan2i7-y0TR2E8&q=" + $scope.mission.adresse);
                 });
             }
         });

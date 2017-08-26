@@ -36,6 +36,10 @@
                     <label>Prenom</label>
                     <input ng-model="employee.lastName" required>
                 </md-input-container>
+                <md-input-container>
+                        <label>Numero</label>
+                        <input ng-model="employee.numero" required>
+                    </md-input-container>
                 <md-input-container ng-show="employee.role==='consultant'">
                     <label>Salaire</label>
                     <input ng-model="employee.salary" required>

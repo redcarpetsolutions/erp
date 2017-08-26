@@ -10,27 +10,43 @@
         </md-sidenav>
         <md-content layout-padding flex>
             <h1>Liste Des Consultants</h1>
+            <md-input-container>
+                <label>Filter</label>
+                <input ng-model="filter" ng-change="filterUsers()">
+            </md-input-container>
+            <md-input-container>
+                <label>Experience</label>
+                <md-select ng-model="exp" ng-change="filterUsers()">
+                    <md-option value="junior">
+                        junior
+                    </md-option>
+                    <md-option value="confirmer">
+                        confirmer
+                    </md-option>
+                    <md-option value="senior">
+                        senior
+                    </md-option>
+                </md-select>
+            </md-input-container>
             <table class="data-table">
                 <tr>
                     <td>Photo</td>
                     <td>Nom Prenom</td>
-                    <td>Salaire</td>
-                    <td>Payment</td>
+                    <td>Experience</td>
                     <td>Competence</td>
                 </tr>
 
-                <tr ng-repeat="c in consultants">
+                <tr ng-repeat="c in display">
                     <td><img ng-src="{{c.picture}}" style="height:128px">
                     </td>
                     <td>{{c.firstName}} {{c.lastName}}</td>
-                    <td>{{c.salary}}</td>
-                    <td>{{c.payment}}</td>
+                    <td>{{c.experience}}</td>
                     <td>
                         <p ng-repeat="s in c.skills">
                             {{s.title}}
                         </p>
                     </td>
-                </p>
+                    </p>
             </table>
         </md-content>
     </div>

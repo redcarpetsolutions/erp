@@ -21,16 +21,16 @@ module.exports = function () {
             });
         }
         $scope.employeeDelete = function (id) {
-            UsersService.delete(id).catch(err=>{
-                DialogService.alert("Erreur","Ce consultant fais partie d'une Mission","OK");
+            UsersService.delete(id).catch(err => {
+                DialogService.alert("Erreur", "Ce consultant fais partie d'une Mission", "OK");
             });
         }
 
         $scope.$watch('$viewContentLoaded', function () {
 
             if ($state.current.name == 'employee') {
-                UsersService.getAllEmployees().then(function (data) {
-                    $scope.employees = data;
+                UsersService.getAll().then(function (response) {
+                    $scope.employees = response.data;
                     $scope.display = $scope.employees;
                 });
             }
@@ -55,15 +55,24 @@ module.exports = function () {
         ///Filter
         $scope.filter = "";
         $scope.role = "";
+        $scope.exp = "";
         $scope.display = new Array();
         $scope.filterUsers = function () {
             $scope.display = new Array();
             $scope.employees.forEach(function (e) {
                 if ((e.firstName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1 ||
                     e.lastName.toLowerCase().indexOf($scope.filter.toLowerCase()) !== -1) &&
-                    (e.role === $scope.role)
+                    (e.role === $scope.role || $scope.role === "") &&
+                    (
+                        (e.experience < 2 && $scope.exp === "junior") ||
+                        (e.experience >= 2 && e.experience < 4 && $scope.exp === "confirmer") ||
+                        (e.experience >= 4 && $scope.exp === "senior") ||
+                        ($scope.exp === "")
+
+                    )
                 ) {
                     $scope.display.push(e);
+
                 }
             });
         }

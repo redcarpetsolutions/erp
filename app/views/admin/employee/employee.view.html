@@ -32,6 +32,21 @@
                     </md-option>
                 </md-select>
             </md-input-container>
+            <md-input-container>
+                <label>Experience</label>
+                <md-select ng-model="exp" ng-change="filterUsers()">
+                    <md-option value="junior">
+                        junior
+                    </md-option>
+                    <md-option value="confirmer">
+                        confirmer
+                    </md-option>
+                    <md-option value="senior">
+                            senior
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            
             <table class="data-table">
                 <tr>
                     <td>Photo</td>

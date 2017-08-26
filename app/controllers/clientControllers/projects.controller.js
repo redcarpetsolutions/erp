@@ -3,7 +3,7 @@
 
 module.exports = function () {
 
-    function controllerFn($scope, DialogService, MissionsService, $state, $stateParams, StoreService) {
+    function controllerFn($scope, DialogService, MissionsService, $state, $stateParams, StoreService, $sce) {
         $scope.interact = true;
         $scope.details = function (m) {
             $state.go('clientprojectsDetails', { id: m.id });
@@ -12,6 +12,7 @@ module.exports = function () {
         $scope.add = function () {
             $scope.mission.client = StoreService.getCurrentUser();
             $scope.mission.validated = false;
+            $scope.mission.type = "externe";
             MissionsService.add($scope.mission).then(function (response) {
                 $state.go('clientprojectsDetails', { id: response.data.id });
             });
@@ -29,9 +30,9 @@ module.exports = function () {
             });
         }
 
-        $scope.saved = function(response){
+        $scope.saved = function (response) {
             console.log(response);
-            $scope.mission.path = response.data.filename;
+            $scope.mission.path = "http://localhost:18080/erp-web/api/upload/" + response.data.filename;
         }
 
         $scope.$watch('$viewContentLoaded', function () {
@@ -43,6 +44,8 @@ module.exports = function () {
             if ($state.current.name == 'clientprojectsDetails') {
                 MissionsService.get($stateParams.id).then(function (response) {
                     $scope.mission = response.data;
+                    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB2BAeujrcRfD1MDCCcfTan2i7-y0TR2E8&q=" + $scope.mission.adresse);
+
                 })
             }
             if ($state.current.name == 'clientprojectsEdit') {
@@ -53,6 +56,6 @@ module.exports = function () {
         });
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'MissionsService', '$state', '$stateParams', 'StoreService'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'MissionsService', '$state', '$stateParams', 'StoreService', '$sce'];
     angular.module('app').controller("ClientProjectsController", controllerFn);
 }

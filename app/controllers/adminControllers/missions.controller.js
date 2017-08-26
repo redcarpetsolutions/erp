@@ -3,7 +3,7 @@
 
 module.exports = function () {
 
-    function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams) {
+    function controllerFn($scope, DialogService, UsersService, MissionsService, $state, $stateParams,$sce) {
         $scope.interact = true;
         $scope.details = function (m) {
             $state.go('missionDetails', { id: m.id });
@@ -86,7 +86,10 @@ module.exports = function () {
                 $scope.task.mission = { id: $scope.mission.id };
 
                 if (idx === -1 && $scope.task.title) {
-                    $scope.mission.tasks.push($scope.task);
+                    let task = new Object();
+                    Object.assign(task,$scope.task);
+                    task.state = "To Do"; 
+                    $scope.mission.tasks.push(task);
                 } else {
                     DialogService.alert('Erreur', "Une autre tache a deja ce titre", "OK")
                 }
@@ -135,10 +138,12 @@ module.exports = function () {
             if ($state.current.name == 'missionDetails') {
                 MissionsService.get($stateParams.id).then(function (response) {
                     $scope.mission = response.data;
+                    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyB2BAeujrcRfD1MDCCcfTan2i7-y0TR2E8&q=" + $scope.mission.adresse);
+                    
                 });
             }
 
-            if ($state.current.name == 'missionEdit') {
+            if ($state.current.name == 'missionEdit' ||$state.current.name == 'missionTasks' ) {
                 UsersService.getAllConsultant().then(function (data) {
                     $scope.consultants = data;
                     $scope.selected = $scope.consultants[0];
@@ -171,6 +176,6 @@ module.exports = function () {
         }
     }
 
-    controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams'];
+    controllerFn.$inject = ['$scope', 'DialogService', 'UsersService', 'MissionsService', '$state', '$stateParams','$sce'];
     angular.module('app').controller("MissionsController", controllerFn);
 }

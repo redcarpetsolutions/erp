@@ -37,6 +37,10 @@
                     <div style="margin-top:30px" on-complete="pdf(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file"
                         on-success="onSuccess(response)"></div>
                 </md-input-container>
+                <md-input-container>
+                    <label>Adresse</label>
+                    <input ng-model="mission.adresse" required>
+                </md-input-container>
             </md-content>
 
             <md-divider>
@@ -100,53 +104,6 @@
                         </md-option>
                     </md-select>
                     <md-button class="md-raised md-primary" ng-click="addCommercial()">Ajouter Commercial</md-button>
-                </md-content>
-            </md-content>
-            <!--  Taches   -->
-            <md-content>
-                <h2> Taches</h2>
-                <md-list>
-                    <md-list-item ng-repeat="e in mission.tasks" ng-click="removeTask(e.title)" class="md-3-line">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>
-                                {{e.title}} : {{e.description}}</h3>
-                            <h4>{{e.responsible.firstName}} {{e.responsible.lastName}}</h4>
-                            <p>{{e.startDate | date }} - {{e.endDate | date}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-                <md-content layout="row">
-                    <md-input-container>
-                        <label>Titre</label>
-                        <input ng-model="task.title" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Description</label>
-                        <input ng-model="task.description" required>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Debut</label>
-                        <md-datepicker ng-model="task.startDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Date De Fin</label>
-                        <md-datepicker ng-model="task.endDate" md-placeholder="Enter date"></md-datepicker>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Responsable</label>
-                        <md-select ng-model="task.responsible">
-                            <md-option ng-value="mission.leader">
-                                {{mission.leader.firstName}} {{mission.leader.lastName}}
-                            </md-option>
-                            <md-option ng-repeat="c in mission.team" ng-value="c">
-                                {{c.firstName}} {{c.lastName}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-
-                    <md-input-container>
-                        <md-button class="md-raised md-primary" ng-click="addTask()">Ajouter Tache</md-button>
-                    </md-input-container>
                 </md-content>
             </md-content>
             <md-button class="md-raised md-accent" ng-click="edit()">Modifier</md-button>

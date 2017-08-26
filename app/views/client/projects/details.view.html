@@ -30,8 +30,15 @@
                             <td>Technologie</td>
                             <td>{{mission.technology}}</td>
                         </tr>
+                        <iframe src="{{url}}" width="100%" height="450" frameborder="0" style="border:0"></iframe>
+
+                        <tr>
+                            <td>PDF</td>
+                            <td><a href="{{mission.path}}">Telecharger</a></td>
+                        </tr>
                         <tr>
                             <td>
+                                <md-button class="md-raised md-accent" ng-if="!mission.validated" ui-sref="clientprojectsEdit({id:mission.id})">Modifier</md-button>
                                 <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
                             </td>
                             <td>
@@ -39,7 +46,26 @@
                         </tr>
                     </table>
                 </md-content>
-                <md-content flex="50" ng-if="mission.validated">
+
+            </md-content>
+            <md-divider>
+            </md-divider>
+            <md-content layout="colunm" layout-padding>
+                <md-content flex="50">
+                    <h2> Commercials </h2>
+                    <md-list>
+                        <md-list-item ng-repeat="e in mission.commercials" ng-click="null" class="md-3-line">
+                            <img ng-src="{{e.picture}}" class="md-avatar" />
+                            <div class="md-list-item-text" layout="column">
+                                <h3>
+                                    {{e.firstName}} {{e.lastName}}</h3>
+                                <h4>Membre</h4>
+                                <p>{{e.salary}} {{e.payment}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+                <md-content flex="50">
                     <h2> Equipe</h2>
                     <md-list>
                         <md-list-item ng-click="null" class="md-3-line">
@@ -64,20 +90,22 @@
                     </md-list>
                 </md-content>
             </md-content>
-            <md-divider ng-if="mission.validated">
+            <md-divider>
             </md-divider>
-            <md-content ng-if="mission.validated">
-                <h2> Tache</h2>
-                <md-list>
-                    <md-list-item ng-repeat="e in mission.tasks" ng-click="null" class="md-3-line">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>
-                                {{e.title}} : {{e.description}}</h3>
-                            <h4>{{e.responsible.firstName}} {{e.responsible.lastName}}</h4>
-                            <p>{{e.startDate | date }} - {{e.endDate | date}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
+            <md-content layout="colunm" layout-padding>
+                <md-content ng-if="mission.tasks && mission.tasks.length > 0">
+                    <h2> Tache</h2>
+                    <md-list>
+                        <md-list-item ng-repeat="e in mission.tasks" ng-click="null" class="md-3-line">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>
+                                    {{e.title}} : {{e.description}}</h3>
+                                <h4>{{e.responsible.firstName}} {{e.responsible.lastName}}</h4>
+                                <p>{{e.startDate | date }} - {{e.endDate | date}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
             </md-content>
         </md-content>
     </div>

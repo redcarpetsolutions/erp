@@ -39,12 +39,16 @@
                         <label>Technologie</label>
                         <input ng-model="mission.technology" required>
                     </md-input-container>
+                    <md-input-container>
+                        <label>Adresse</label>
+                        <input ng-model="mission.adresse" required>
+                    </md-input-container>
                 </md-content>
             </md-content>
             <md-divider>
-            <md-button class="md-raised md-accent" ng-click="update()">Confirmer</md-button>
-            <md-button class="md-raised md-warn" ng-click="delete()">Supprimer</md-button>
-            <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
+                <md-button class="md-raised md-accent" ng-click="update()">Confirmer</md-button>
+                <md-button class="md-raised md-warn" ng-click="delete()">Supprimer</md-button>
+                <md-button class="md-raised md-primary" ui-sref="clientprojects">Retour</md-button>
         </md-content>
     </div>
 </div>

@@ -21,7 +21,7 @@
 
                 <tr ng-repeat="b in besoins">
                     <td>
-                        <img src="{{b.client.picture}}" style="height:128px;width:128px;" /><br><br> {{b.client.firstName}} {{b.client.lastName}}
+                        <img ng-src="{{b.client.picture}}" style="height:128px;width:128px;" /><br><br> {{b.client.firstName}} {{b.client.lastName}}
                     </td>
                     <td>{{b.title}}</td>
                     <td>{{b.description}}</td>

@@ -50,7 +50,8 @@ module.exports = function () {
                     var missions = response.data;
                     var ret = new Array();
                     missions.forEach(function (m) {
-                        if (m.client.id === id) {
+                        
+                        if (m.client && m.client.id === id) {
                             ret.push(m);
                         }
                     }, this);
@@ -67,11 +68,32 @@ module.exports = function () {
                     var missions = response.data;
                     var ret = new Array();
                     missions.forEach(function (m) {
-                        if (m.leader.id === id) {
+                        if (m.leader && m.leader.id === id) {
                             ret.push(m);
                         }
                         if (m.team) {
                             m.team.forEach((t) => {
+                                if (t.id === id) {
+                                    ret.push(m);
+                                }
+                            });
+                        }
+                    });
+                    resolve(ret);
+                }).catch(function (err) {
+                    reject(err);
+                });
+            });
+        }
+
+        this.getByCommercial = function (id) {
+            return $q(function (resolve, reject) {
+                $http.get(config.url + "/missions").then(function (response) {
+                    var missions = response.data;
+                    var ret = new Array();
+                    missions.forEach(function (m) {
+                        if (m.commercials) {
+                            m.commercials.forEach((t) => {
                                 if (t.id === id) {
                                     ret.push(m);
                                 }

@@ -1,19 +1,45 @@
 <div layout="column" ng-cloak layout-align="center center" ng-controller="AuthenticationController">
     <md-card>
-        <img ng-src="https://assets.entrepreneur.com/content/16x9/822/20160118164234-interior-modern-office-desks-space-computers.jpeg" class="md-card-image" alt="Washed Out">
-        <md-card-content layout="column">
+          <md-card-content layout="column" style="width:1028px;text-align:center;">
+              <h1>Inscription Client</h1>
             <md-input-container>
-                <label>Login</label>
-                <input ng-model="user.username" required>
+                <label>Email</label>
+                <input ng-model="user.email" required>
             </md-input-container>
 
+            <md-input-container>
+                <label>Nom</label>
+                <input ng-model="user.firstName" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Prenom</label>
+                <input ng-model="user.lastName" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Numero</label>
+                <input ng-model="user.numero" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Societe</label>
+                <input ng-model="user.societe" required>
+            </md-input-container>
+            <md-input-container>
+                    <label>Photo</label>
+                <div style="margin-top:50px">
+                    <div on-complete="photo(response)" upload-button url="http://localhost:18080/erp-web/api/upload" param="file" on-success="onSuccess(response)"></div>
+                </div>
+            </md-input-container>
             <md-input-container>
                 <label>Password</label>
                 <input ng-model="user.password" type="password" required>
             </md-input-container>
-
             <md-input-container>
-                <md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
+                <label>Confimer Password</label>
+                <input ng-model="password" type="password" required>
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised md-primary" ng-click="register()">Register</md-button>
+                <md-button class="md-raised md-secondary" ng-click="null" ui-sref="login">Login</md-button>
                 <md-button class="md-raised md-warn" ng-click="null" ui-sref="index">Retour</md-button>
             </md-input-container>
         </md-card-content>

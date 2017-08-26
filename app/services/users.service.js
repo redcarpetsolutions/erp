@@ -68,6 +68,10 @@ module.exports = function () {
                 });
             });
         }
+        this.getAll = function(){
+            return $http.get(config.url+"/users");
+        }
+
         this.get = function(id){
             return $http.get(config.url+"/users/"+id);
         }

@@ -7,7 +7,7 @@ module.exports = function () {
             return $http.post(config.url + "/users/login", user);
         }
         this.register = function (user) {
-            return $http.post(config.url + "/users/login", user);
+            return $http.post(config.url + "/users/register", user);
         }
     }
 

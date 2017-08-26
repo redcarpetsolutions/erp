@@ -27,6 +27,10 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/login',
         templateUrl: "views/login.view.html"
     });
+    $stateProvider.state('register', {
+        url: '/register',
+        templateUrl: "views/register.view.html"
+    });
     //Index
     $stateProvider.state('index', {
         url: '/',
@@ -130,6 +134,10 @@ function configFn($mdThemingProvider, $stateProvider, $urlRouterProvider) {
         url: '/admin/missions/:id/edit',
         templateUrl: "views/admin/missions/edit.view.html"
     });
+    $stateProvider.state('missionTasks', {
+        url: '/admin/missions/:id/tasks',
+        templateUrl: "views/admin/missions/tache.view.html"
+    });
     ///Project
     $stateProvider.state('projects', {
         url: '/admin/projects',
@@ -216,6 +224,7 @@ require('./directives/toolbar.directive.js')();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 require('./controllers/directivesControllers/menu.controller.js')();
+require('./controllers/directivesControllers/header.controller.js')();
 require('./controllers/auth.controller.js')();
 require('./controllers/profile.controller.js')();
 
